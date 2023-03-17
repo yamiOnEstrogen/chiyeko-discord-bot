@@ -1,0 +1,40 @@
+{
+  "name": "chiyeko-ai-bot",
+  "version": "1.0.0",
+  "description": "The discord bot for the twitter account @chiyekovt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/deploy.js && node src/index.js",
+    "dev": "nodemon src/index.js",
+    "deploy": "node src/deploy.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "unfatal",
+    "discord-bot"
+  ],
+  "author": "kiyo",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/builders": "^1.2.0",
+    "@discordjs/rest": "^1.1.0",
+    "@discordjs/voice": "^0.14.0",
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.1",
+    "chalk": "^4.1.2",
+    "discord-api-types": "^0.37.5",
+    "discord.js": "^13.10.3",
+    "discord.js-leveling": "^5.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mal-scraper": "^2.11.4",
+    "mongoose": "6.6.0",
+    "node-cron": "^3.0.2",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.20",
+    "url": "^0.11.0",
+    "yuri-canvas": "^4.0.6"
+  }
+}
