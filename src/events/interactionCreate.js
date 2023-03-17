@@ -20,7 +20,7 @@ module.exports = {
                 .setColor('#ff0000')
                 .setTitle('Error')
                 .setDescription('There was an error while executing this command!')
-                .setFooter('If this error persists, please contact kiyo#5423')
+                .setFooter('If this error persists, please open a ticket.')
                 .setTimestamp();
             await interaction.reply({ embeds: [errorEmbed] });
         }

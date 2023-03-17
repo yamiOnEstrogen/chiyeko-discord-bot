@@ -1,24 +1,26 @@
 const mongoose = require("mongoose");
 const Logger = require("../utils/Logger");
 const logger = new Logger({ debug: true });
-// const botConfig = require("../utils/botconfig.js");
-// const axios = require("axios");
-// const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 const cron = require("node-cron");
 const Levels = require("discord.js-leveling");
 const qotd = require("../utils/qotd.js");
+const Twitter = require("../utils/twitter.js");
+const webServer = require("../web-server.js");
+
 
 module.exports = {
   name: "ready",
   once: true,
   async execute(client) {
     const qotdClass = new qotd(client);
+    const twitter = new Twitter(client);
 
     console.clear();
-    logger.info(`Logged in as ${client.user.tag}!`);
-    logger.info(`Ready to serve a total of ${client.users.cache.size} users.`);
+    logger.log(`Logged in as ${client.user.tag}!`);
+    logger.log(`Ready to serve a total of ${client.users.cache.size} users.`);
+    webServer(client);
 
-    client.user.setActivity(`/  || Made By kiyo#5423`, {
+    client.user.setActivity(`/ || ${client.users.cache.size} caffine filled humans`, {
        type: "WATCHING",
     });
 
@@ -36,7 +38,7 @@ module.exports = {
     });
 
     db.once("open", () => {
-      logger.info("Connected to MongoDB");
+      logger.log("Connected to MongoDB");
     });
 
     Levels.setURL(process.env.db);
@@ -44,6 +46,8 @@ module.exports = {
      cron.schedule("45 6 * * *", () => {
       qotdClass.generateQuestion();
     });
+
+    twitter.on();
     
 
 

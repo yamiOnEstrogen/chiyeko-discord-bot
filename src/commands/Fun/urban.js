@@ -33,9 +33,7 @@ module.exports = {
     axios.request(options).then(function (response) {
       const data = response.data;
       const firstdef = data.list[0];
-        //   Get rid of the [ and ] in the definition
         const definition = firstdef.definition.replace(/\[/g, "").replace(/\]/g, "");
-        //   Get rid of the [ and ] in the example
         const example = firstdef.example.replace(/\[/g, "").replace(/\]/g, ""); 
       const embed = new MessageEmbed()
         .setTitle(

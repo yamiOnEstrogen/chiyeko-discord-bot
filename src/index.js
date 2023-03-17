@@ -14,17 +14,14 @@ const client = new Client({
 
 const fs = require("fs");
 const path = require("path");
-const express = require("express");
-const app = express();
 const dotenv = require("dotenv");
-const botConfig = require("./utils/botconfig.js");
 dotenv.config();
-const Logger = require("./utils/Logger.js");
-const logger = new Logger({
-  debug: true,
-});
-const Levels = require("discord.js-leveling");
 client.commands = new Collection();
+
+client.formatDate = (date) => {
+  if (!date) return "No date provided";
+  return new Date(date).toLocaleString();
+};
 
 
 const commandFolders = fs.readdirSync(path.join(__dirname, "commands"));
@@ -82,23 +79,6 @@ client.on("messageCreate", async (message) => {
     setTimeout(() => msg.delete(), 5000);
   });
 });
-
-
-
-
-
-
-
-app.get("/", (req, res) => {
-    res.send("Up!")
-})
-
-
-
-
-app.listen(process.env.PORT || 8080, () => {
-  console.log("Server is now online!")
-})
 
 
 client.login(process.env.token);

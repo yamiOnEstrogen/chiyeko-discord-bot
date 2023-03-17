@@ -26,6 +26,6 @@ for (const folder of commandFolders) {
 
 const rest = new REST({ version: '9' }).setToken(process.env.token);
 
-rest.put(Routes.applicationGuildCommands("1009790799619301396", "1077432247772258396"), { body: commands })
+rest.put(Routes.applicationGuildCommands("1077684781774557233", "981632132701126726"), { body: commands })
 	.then(() => console.log("(/) Successfully registered application commands. (/)"))
 	.catch(console.error);

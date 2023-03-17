@@ -40,6 +40,7 @@ module.exports = {
             .setColor('PURPLE')
             .setFooter(`User ID: ${member.user.id}`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
+            .setImage("https://media.tenor.com/73wKQVjruFcAAAAC/chiaki-nanami-anime.gif")
 
             
 
@@ -57,7 +58,7 @@ module.exports = {
                 
                 await interaction.member.roles.add(botConfig.memberRole);
                 await interaction.update({ embeds: [embedVerifed], components: [] });
-                logger.info(`Verified ${member.user.tag}`);
+                logger.log(`Verified ${member.user.tag}`);
             }
         })
 

@@ -18,11 +18,11 @@ module.exports = {
             .setColor('PURPLE')
             .setTimestamp()
             .setFooter(`User ID: ${member.user.id}`)
-            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
+            .setImage('https://media.tenor.com/SPkUmWsvnGIAAAAd/sumi-sakurasawa-rent-a-girlfriend.gif');
 
         await member.guild.channels.cache.get(botConfig.goodbyeChannel).send({ embeds: [embed] });
 
-        logger.info(`Member left: ${member.user.tag}`);
+        logger.log(`Member left: ${member.user.tag}`);
 
         
         const user = await Levels.fetch(member.user.id, member.guild.id); // Selects the target from the database.
@@ -33,7 +33,7 @@ module.exports = {
 
         Levels.deleteUser(member.user.id, member.guild.id);
 
-        logger.info(`Deleted ${member.user.tag} from the database`);
+        logger.log(`Deleted ${member.user.tag} from the database`);
 
     }
 };
