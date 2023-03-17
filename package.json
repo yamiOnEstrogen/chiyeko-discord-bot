@@ -29,7 +29,7 @@
     "discord.js-leveling": "^5.4.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
-    "mal-scraper": "^2.11.4",
+    "mal-scraper": "^1.5.0",
     "mongoose": "6.6.0",
     "node-cron": "^3.0.2",
     "node-fetch": "^2.6.7",
