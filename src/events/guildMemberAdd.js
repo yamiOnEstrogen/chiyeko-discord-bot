@@ -25,42 +25,19 @@ module.exports = {
             .setTimestamp()
             .setFooter(`User ID: ${member.user.id}`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
-
-            const row = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('verify')
-                    .setLabel('Verify')
-                    .setStyle('PRIMARY')
-            );
-
-            const embedVerifed = new MessageEmbed()
-            .setTitle(`Welcome to ${member.guild.name}`)
-            .setDescription(`${randomWelcomeMessage}`)
-            .setColor('PURPLE')
-            .setFooter(`User ID: ${member.user.id}`)
-            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
             .setImage("https://media.tenor.com/73wKQVjruFcAAAAC/chiaki-nanami-anime.gif")
 
             
 
 
-        await member.guild.channels.cache.get(botConfig.welcomeChannel).send({ embeds: [embed], components: [row] });
+        await member.guild.channels.cache.get(botConfig.welcomeChannel).send({ embeds: [embed] });
 
-        logger.info(`New member: ${member.user.tag}`);
+        logger.log(`New member: ${member.user.tag}`);
 
+        await interaction.member.roles.add(botConfig.memberRole);
 
-        member.client.on('interactionCreate', async interaction => {
-            if (!interaction.isButton()) return;
-            if (interaction.customId === 'verify') {
-                if (interaction.member.user.id != member.user.id) return;
-                if (interaction.member.roles.cache.has(botConfig.memberRole)) return await interaction.reply({ content: `You are already verified!`, ephemeral: true });
-                
-                await interaction.member.roles.add(botConfig.memberRole);
-                await interaction.update({ embeds: [embedVerifed], components: [] });
-                logger.log(`Verified ${member.user.tag}`);
-            }
-        })
+        logger.log(`Added member role to ${member.user.tag}`);
+
 
        
 

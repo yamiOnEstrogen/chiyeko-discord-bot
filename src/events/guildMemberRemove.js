@@ -2,7 +2,6 @@ const Logger = require('../utils/Logger');
 const logger = new Logger({ debug: true });
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const botConfig = require("../utils/botconfig.js");
-const Levels = require("discord.js-leveling");
 
 module.exports = {
     name: 'guildMemberRemove',
@@ -24,16 +23,6 @@ module.exports = {
 
         logger.log(`Member left: ${member.user.tag}`);
 
-        
-        const user = await Levels.fetch(member.user.id, member.guild.id); // Selects the target from the database.
-
-        if (!user) {
-            return;
-        }
-
-        Levels.deleteUser(member.user.id, member.guild.id);
-
-        logger.log(`Deleted ${member.user.tag} from the database`);
 
     }
 };

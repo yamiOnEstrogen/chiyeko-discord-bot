@@ -21,6 +21,7 @@
     "@discordjs/builders": "^1.2.0",
     "@discordjs/rest": "^1.1.0",
     "@discordjs/voice": "^0.14.0",
+    "@octokit/core": "^4.2.0",
     "axios": "^0.27.2",
     "body-parser": "^1.20.1",
     "chalk": "^4.1.2",

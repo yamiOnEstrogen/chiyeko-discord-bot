@@ -10,3 +10,12 @@ api_key = AAAAAAAAAAAAAAAAAAAAAKVHiQEAAAAA%2FQ8Is25dHhfbXGOJflt14oPwBcw%3D7xXyxf
 # Discord Things
 redirect_uri = 
 secret = 
+staffRole = 
+ticketParent =
+
+
+# Github Things
+
+github_token = 
+github_repo = 
+github_owner = 

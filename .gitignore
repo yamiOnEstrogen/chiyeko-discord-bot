@@ -106,3 +106,4 @@ dist
 # Misc
 .env 
 package-lock.json
+test.js
