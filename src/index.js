@@ -17,10 +17,54 @@ const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 client.commands = new Collection();
+const config = require("./utils/botconfig.js");
 
 client.formatDate = (date) => {
   if (!date) return "No date provided";
   return new Date(date).toLocaleString();
+};
+
+client.socials = [
+  {
+    name: "Twitter",
+    url: "https://twitter.com/chiyekovt",
+  },
+  {
+    name: "Twitch",
+    url: "https://twitch.tv/chiyekotheai",
+  },
+  {
+    name: "Discord",
+    url: "https://discord.gg/ZuPHXurZvn",
+  },
+  {
+    name: "Reddit",
+    url: "https://reddit.com/r/chiyekovtuber",
+  }
+];
+
+
+client.staff = () => {
+  const guild = client.guilds.cache.get(config.guildID);
+  const staff_role = guild.roles.cache.get(process.env.staffRole);
+  
+  const staff = guild.members.cache.filter(member => member.roles.cache.has(staff_role.id));
+
+  const checkForAnimatedAvatar = (member) => {
+    if (member.user.avatar.startsWith("a_")) return `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.gif`;
+    else return `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.png`;
+  };
+
+  const staffArray = staff.map((member) => {
+    return {
+      name: member.user.username,
+      avatar: checkForAnimatedAvatar(member),
+      id: member.user.id,
+      tag: member.user.tag,
+    };
+  });
+
+  return staffArray;
 };
 
 
@@ -69,7 +113,7 @@ client.on("messageCreate", async (message) => {
 
 
   if (!user.isAfk) return;
-  if (message.guildId != "981632132701126726") return;
+  if (message.guildId != config.guildID) return;
 
   message.delete();
 

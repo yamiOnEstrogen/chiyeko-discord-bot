@@ -3,11 +3,13 @@ const logger = new Logger({ debug: true });
 const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 const botConfig = require("./botconfig.js");
 const axios = require("axios");
+const aiSchema = require("../models/ai.info.js");
 
 let lastTweet = null;
 
 async function getIdFromUsername(u) {
-    const url = `https://api.twitter.com/2/users/by/username/${u}?user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld`;
+  if (!u) throw new Error("No username provided");
+  const url = `https://api.twitter.com/2/users/by/username/${u}?user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld`;
   const config = {
     headers: {
       Authorization: `Bearer ${process.env.api_key}`,
@@ -27,6 +29,32 @@ async function getIdFromUsername(u) {
   }
 
     return userData;
+}
+
+async function getTweetData(id) {
+  if (!id) throw new Error("No tweet ID provided");
+
+  const url = "https://api.twitter.com/2/tweets?ids=" + id + "&expansions=attachments.media_keys&media.fields=duration_ms,height,media_key,preview_image_url,public_metrics,type,url,width,alt_text";
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${process.env.api_key}`,
+    },
+  };
+
+  const response = await axios.get(url, config);
+
+  // Check if the tweet contains media, if so, return the media URL
+  if (response.data.includes.media) {
+    const media = response.data.includes.media[0];
+    const mediaUrl = media.url;
+
+    return mediaUrl;
+  }
+
+  return null;
+
+
 }
 
 class Twitter {
@@ -55,43 +83,36 @@ class Twitter {
 
         const tweet = response.data.data[0];
 
-        const tweetCheck = await this.client.channels.fetch("1015727808032542730").then((channel) => {
-            const messages = channel.messages.cache;
-            if (messages.size === 0) return;
-            const lastMessage = messages.last();
-            if (!lastMessage.embeds[0]) return;
-            const lastMessageEmbed = lastMessage.embeds[0];
-            const lastMessageFooter = lastMessageEmbed.footer.text;
-
-            if (lastMessageFooter === tweet.id) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        })
-
-        if (tweetCheck) return;
-
         if (tweet.text.startsWith("RT")) return;
 
-        logger.log(`New tweet from ${this.user}!`, "twitter");
 
-        const embed = new MessageEmbed()
-            .setAuthor(user.data.name, user.data.image, `https://twitter.com/${user.data.username}`)
+        await aiSchema.findOne({ lastTweet: tweet.id }).then(async (ai) => {
+          if (ai) return;
+          // Update it
+          await aiSchema.findOneAndUpdate({ lastTweet: tweet.id }, { lastTweet: tweet.id }, { upsert: true });
+
+          const embed = new MessageEmbed()
+            .setTitle(`${user.data.name} (@${user.data.username})`)
             .setDescription(tweet.text)
-            .setFooter(`${tweet.id}`)
-
-        const button = new MessageButton()
-            .setStyle("LINK")
-            .setLabel("View Tweet")
             .setURL(`https://twitter.com/${user.data.username}/status/${tweet.id}`)
+            .setThumbnail(user.data.image)
 
-        const row = new MessageActionRow()
-            .addComponents(button)
+            .setColor("RANDOM");
 
-        const channel = await this.client.channels.fetch("1015727808032542730");
-        channel.send({ embeds: [embed], components: [row] });
+            // Check if it has an image
+           await getTweetData(tweet.id).then((url) => {
+                if (url) embed.setImage(url);
+           })
+
+          const row = new MessageActionRow().addComponents(
+            new MessageButton()
+              .setStyle("LINK")
+              .setLabel("View Tweet")
+              .setURL(`https://twitter.com/${user.data.username}/status/${tweet.id}`)
+          );
+
+          this.client.channels.cache.get("1005920559944712433").send({ embeds: [embed], components: [row] });
+        });
 
     }, 10000); // ! Hardcoded value because I don't want to make it a parameter
   }

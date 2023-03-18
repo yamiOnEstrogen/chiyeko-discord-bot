@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chiyeko - <%= title %></title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+        .hidden {
+          display: none;
+        }
+
+        body {
+            /* Set the background image to "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd9vE8EnyIzW_FLzqH1ayduKmMbYJjR8O8FQ&usqp=CAU" with no reapat */
+            background-image: url("https://cdn.discordapp.com/attachments/981632133191843852/1086753739521663077/ff7972b55beb9544dc25f88e79176c30eed46488_2000x2000.webp");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+        }
+
+        .center {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .center-alert {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .center-progress {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .blur-background {
+          filter: blur(5px);
+        }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="alert alert-success center-alert" role="alert">
+        <h4 class="alert-heading" id="tips">ಠ﹏ಠ</h4>
+      </div>
+      <div class="progress hidden">
+        <div
+          class="progress-bar progress-bar-striped progress-bar-animated"
+          role="progressbar center-progress"
+          aria-label="wow"
+          aria-valuenow="0"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+
+    <script>
+      const i = "<%= url %>";
+      const tips = [
+        "Asking the gods for permission...",
+        "UwU",
+        "OwO",
+        "༼ つ ◕_◕ ༽つ",
+        "o((>ω< ))o",
+        "ヽ( ͡° ͜ʖ ͡°)ﾉ",
+        "ヽ༼ຈل͜ຈ༽ﾉ",
+        "O.O",
+        "(☞ﾟヮﾟ)☞"
+      ];
+
+      let usedTips = [];
+
+      async function generateRandomTime() {
+        return Math.floor(Math.random() * 10) + 1;
+      }
+
+
+
+      let progressBarDone = false;
+      async function incrementProgress() {
+        let progress = document.querySelector(".progress-bar");
+        let value = parseInt(progress.getAttribute("aria-valuenow"));
+        let max = parseInt(progress.getAttribute("aria-valuemax"));
+        let min = parseInt(progress.getAttribute("aria-valuemin"));
+        let text = progress.innerHTML;
+        let interval = setInterval(() => {
+          if (value >= max) {
+            clearInterval(interval);
+            return;
+          }
+          value += 1;
+          progress.setAttribute("aria-valuenow", value);
+          progress.style.width = `${value}%`;
+          progress.innerHTML = `${value}%`;
+          console.log({ value, max, min, text })
+          
+        }, 100);
+      }
+      function clearInterval(interval) {
+        clearInterval(interval);
+      }
+      setInterval(() => {
+        const randomTip = tips[Math.floor(Math.random() * tips.length)];
+        
+        if (usedTips.includes(randomTip)) {
+          return;
+        }
+        usedTips.push(randomTip);
+        document.querySelector("#tips").innerHTML = randomTip;
+      }, 2000);
+      incrementProgress();
+      setTimeout(() => {
+        window.location.href = "<%= url %>";
+      }, 13000);
+    </script>
+  </body>
+</html>

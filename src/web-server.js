@@ -65,7 +65,44 @@ function webServer(client) {
 
     // * Home Handler
     app.get("/", async (req, res) => {
-        res.send("Nothing to see here!");
+      res.redirect("/_?url=/home&title=Home");
+    });
+
+    app.get("/home", async (req, res) => {
+        const owner = await client.users.fetch("547923574833545226");
+        console.log(client.staff())
+        res.render("home", { 
+          client: client, 
+          owner: owner,
+          staff: client.staff(),
+          showModals: false,
+        });
+    });
+
+    // * Load Handler
+    app.get("/_", async (req, res) => {
+      url = req.query.url;
+      if (!url) url = "/";
+      res.render("misc/loader", {
+        client: client,
+        url: url,
+        title: req.query.title,
+      })
+    });
+
+    app.get("/socials/:i", async (req, res) => {
+      const socurl = req.params.i;
+
+      client.socials.forEach((soc) => {
+        if (soc.name.toLowerCase() == socurl.toLowerCase()) {
+          res.redirect(soc.url);
+        }
+      });
+    })
+
+    // * General Handler
+    app.get("*", async (req, res) => {
+        res.render("404", { client: client });
     })
 
 
