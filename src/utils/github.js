@@ -57,7 +57,7 @@ class Github {
 
     // ! Embed functions (For discord)
 
-    async publishRelease(channel = "1055707718423416832", color = "#0379FF", title = "New release!", message = "A new release has been published on github!", isInDevelopment = true) {
+    async publishRelease(channel = "1055707718423416832", color = "#0379FF", title = "New release!", message = "A new release has been published on github!", isInDevelopment = false) {
         
         const getTime = () => {
             if (isInDevelopment) return 2000; // 2 seconds
