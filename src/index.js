@@ -67,6 +67,63 @@ client.staff = () => {
   return staffArray;
 };
 
+client.donate = (id, amount, code) => {
+  if (!id) throw new Error("No ID provided");
+  if (!amount) throw new Error("No amount provided");
+
+  const guild = client.guilds.cache.get(config.guildID);
+  try {
+    guild.members.fetch(id).then((member) => {
+      if (!member) return "No member found";
+
+      member.roles.add(process.env.supporterRole).then(() => {
+        const donateEmbed = new MessageEmbed()
+          .setTitle("Thank you for supporting Chiyeko!")
+          .setDescription(
+            `Thank you for supporting Chiyeko! You have been given the **Supporter** role in the Chiyeko Discord server.`
+          )
+          .setColor("RANDOM")
+          .setFooter("Thank you for supporting Chiyeko!")
+          .setTimestamp();
+
+          const row = new MessageActionRow()
+          .addComponents(
+              new MessageButton()
+                  .setCustomId('supporter')
+                  .setLabel('Supporter')
+                  .setStyle('PRIMARY')
+                  .setEmoji('👑')
+                  .setDisabled(true),
+                new MessageButton()
+                  .setLabel('Discord Server')
+                  .setStyle('LINK')
+                  .setURL('https://discord.gg/ZuPHXurZvn'),
+          );
+
+
+        member.send({ embeds: [donateEmbed], components: [row] });
+
+        const logEmbed = new MessageEmbed()
+          .setTitle("New Supporter")
+          .setDescription(
+            `**${member.user.username}** has donated **${amount}** ${code.toUpperCase()} to Chiyeko!`
+          )
+          .setColor("RANDOM")
+          .setFooter("Thank you for supporting Chiyeko!")
+          .setTimestamp();
+
+        const logChannel = client.channels.cache.get(process.env.logChannel);
+
+        logChannel.send({ embeds: [logEmbed] });
+      })
+    });
+  } catch (err) {
+  //  DO not crash the bot if something goes wrong
+    throw new Error(err);
+    
+  }
+};
+
 
 const commandFolders = fs.readdirSync(path.join(__dirname, "commands"));
 

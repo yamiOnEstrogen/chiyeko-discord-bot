@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <title>Chiyeko - Donate</title>
+
+    <link
+      href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      
+      .container {
+        max-width: 960px;
+      }
+
+      .pricing-header {
+        max-width: 700px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="check" viewBox="0 0 16 16">
+        <title>Check</title>
+        <path
+          d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+        />
+      </symbol>
+    </svg>
+
+    <div class="container py-3">
+      <header>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+          <h1 class="display-4 fw-normal">
+            Donate
+          </h1>
+          <p class="fs-5 text-muted">
+           Do you like Chiyeko? Consider donating to help keep the site running.
+          </p>
+        </div>
+      </header>
+
+      <main>
+        <div class="row text-center hidden" id="error">
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+              <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+              <div id="error-message">
+                fff
+              </div>
+            </div>
+  
+        </div> 
+
+        <div id="smart-button-container">
+            <div style="text-align: center;">
+              <label class="visually-hidden" for="autoSizingInputGroup">
+                Amount
+              </label>
+              <div class="input-group">
+                <div class="input-group-text">$</div>
+                <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Amount">
+              </div>
+            </br>
+              <div id="paypal-button-container"></div>
+            </div>
+          </div>
+
+      </main>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+
+  const amount_input = document.getElementById('autoSizingInputGroup');
+  let amount;
+  const error = document.getElementById('error');
+   
+  amount_input.addEventListener('input', function() {
+    amount = amount_input.value;
+    if (amount < 5 && amount != '' && amount != 0) {
+      error.classList.remove('hidden');
+      document.getElementById('error-message').innerHTML = 'Minimum donation is $5';
+    } else {
+      error.classList.add('hidden');
+    }
+  });
+
+  function initPayPalButton() {
+    paypal.Buttons({
+      style: {
+        shape: 'pill',
+        color: 'black',
+        layout: 'horizontal',
+        label: 'buynow',
+        
+      },
+
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{"amount":{"currency_code":"USD","value":amount}}]
+        });
+      },
+
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(async function(orderData) {
+          
+          // Full available details
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+          // // Show a success message within this page, e.g.
+          
+
+          await fetch('/api/paypal', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `<%= user?.id %>`
+            },
+            body: JSON.stringify(orderData)
+          }).then(res => res.json()).then(data => {
+            if (data.success) {
+              const element = document.getElementById('paypal-button-container');
+              element.innerHTML = '';
+              element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            } else {
+             error.classList.remove('hidden');
+              document.getElementById('error-message').innerHTML = data.error;
+            }
+          });
+          
+        });
+      },
+
+      onError: function(err) {
+        console.log(err);
+      }
+    }).render('#paypal-button-container');
+  }
+  initPayPalButton();
+</script>
+    </div>
+  </body>
+</html>

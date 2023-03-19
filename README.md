@@ -79,10 +79,24 @@ Start the bot
 ## How to run this project
 
 *   **.env**
-
-    *   `token` - The token to be used for the bot || [LINK](https://discord.com/developers/applications)
+    ## Misc Stuff
     *   `db` - The database url || [LINK](https://www.mongodb.com/)
+    ## Twitter Stuff
+    *  `api_key` - The API key for twitter || [LINK](https://developer.twitter.com/en/portal/dashboard)
+    ## Discord Stuff
+     *   `token` - The token to be used for the bot || [LINK](https://discord.com/developers/applications)
+    *  `redirect_uri` - The redirect uri for discord oauth2 || [LINK](https://discord.com/developers/applications)
+    *  `secret` - The secret for discord oauth2 || [LINK](https://discord.com/developers/applications)
+    * `staffRole` - The role that will be pinged when someone opens a ticket || [LINK](https://support.discord.com/hc/en-us/articles/206029707-How-do-I-set-up-Permissions-)
+    * `ticketParent` - The parent category for the tickets (Create a category and put the ID here) || [LINK](https://support.discord.com/hc/en-us/articles/360028038352-Channel-Categories-101)
+    * `supporterRole` - The role that will be given to supporters || [LINK](https://wwww.chiyeko.xyz/donate)
+    * `logChannel` - The channel where the logs will be sent || [LINK](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
+    ## Github Stuff
+    * `github_token` - The token for the github api || [LINK](https://github.com/settings/tokens)
+    * `github_repo` - The repo for the github api || [LINK](https://github.com/kiylol/chiyeko-discord-bot)
+    * `github_owner` - The username for the github api || [LINK](https://github.com/kiylol)
 
+ 
 *   **/utils/botconfig.js**
     * `memberRole` - The role to be given to members when they join the server
     * `welcomeChannel` - The channel where the welcome message will be sent

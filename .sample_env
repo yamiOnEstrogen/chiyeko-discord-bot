@@ -4,7 +4,7 @@ db =
 
 
 # Twitter Stuff
-api_key = AAAAAAAAAAAAAAAAAAAAAKVHiQEAAAAA%2FQ8Is25dHhfbXGOJflt14oPwBcw%3D7xXyxfgzcQeNenmFaXAiTncYnXd2cBQTNlnNkkXE1hDqapdSDC
+api_key =
 
 
 # Discord Things
@@ -12,6 +12,8 @@ redirect_uri =
 secret = 
 staffRole = 
 ticketParent =
+supporterRole = 
+logChannel = 
 
 
 # Github Things

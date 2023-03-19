@@ -41,7 +41,6 @@ async function findUserData(req) {
 
   if (!id) return null;
 
-  const user = await userSchema.findOne({ userID: id });
 
   const options = {
     method: "GET",
@@ -55,8 +54,6 @@ async function findUserData(req) {
   const res = await axios(options);
 
   const data = res.data;
-
-  if (!user) return null;
 
   return data;
 };
@@ -90,6 +87,15 @@ function webServer(client) {
       })
     });
 
+    app.get("/donate", async (req, res) => {
+      if (!req.cookies.user) return res.redirect("/_?url=/login&title=Login");
+
+      res.render("misc/donate", {
+        client: client,
+        user: await findUserData(req) || null,
+      })
+    })
+
     app.get("/socials/:i", async (req, res) => {
       const socurl = req.params.i;
 
@@ -98,12 +104,78 @@ function webServer(client) {
           res.redirect(soc.url);
         }
       });
+    });
+
+    app.get("/login", async (req, res) => {
+      res.redirect(`https://discord.com/api/oauth2/authorize?client_id=1077684781774557233&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth&response_type=code&scope=identify%20email`);
     })
 
-    // * General Handler
-    app.get("*", async (req, res) => {
-        res.render("404", { client: client });
+
+     // * OAuth Handler (Discord)
+     app.get("/oauth", async (req, res) => {
+      const data_1 = new URLSearchParams();
+      data_1.append('client_id', "1077684781774557233");
+      data_1.append('client_secret', `${process.env.secret}`);
+      data_1.append('grant_type', 'authorization_code');
+      data_1.append('redirect_uri', `${process.env.redirect_uri}`);
+      data_1.append('scope', 'identify, email');
+      data_1.append('code', req.query.code);
+
+      fetch('https://discord.com/api/oauth2/token', { method: "POST", body: data_1 }).then(response => response.json()).then(data => {
+          const options = {
+              method: 'GET',
+              url: 'https://discord.com/api/users/@me',
+              headers: {
+                  'Authorization': `Bearer ${data.access_token}`
+              }
+          }
+
+         axios
+                  .get(options.url, { headers: options.headers })
+                  .then(async (response) => {
+                      const data = response.data;
+
+                      res.cookie("user", data, {
+                          maxAge: 1000 * 60 * 60 * 24 * 30,
+                          httpOnly: true,
+                      });
+
+
+                     return res.redirect("/");
+
+
+
+                  })
+                  .catch((err) => {
+                      console.log(err);
+                  });
+          });
+    });
+
+
+    app.post('/api/paypal', async (req, res) => {
+      const data = req.body;
+      console.log(req.headers["authorization"]);
+      
+      if (!req.headers["authorization"]) return res.json({ error: "No Authorization Header" });
+
+      console.log(data)
+
+      // Check if the payment is valid
+      if (data.status !== "COMPLETED") return res.json({ error: "Payment not completed" });
+
+      const amount = data.purchase_units[0].amount.value;
+      const currency = data.purchase_units[0].amount.currency_code;
+
+      if (amount > 300) return res.json({ error: "Payment too high (Only up to $300 USD)" });
+      const final = client.donate("827683263040192512", amount, currency);
+
+      if (final === "No member found") return res.json({ error: "Sorry, but you are not in the discord server." });
+
+
+      res.status(200).json({ success: true });
     })
+  
 
 
 

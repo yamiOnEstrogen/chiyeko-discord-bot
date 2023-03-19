@@ -186,6 +186,26 @@
         transform: scale(1.1);
       }
     }
+
+    .modal-sheet .modal-dialog {
+      width: 380px;
+      transition: bottom 0.75s ease-in-out;
+    }
+    .modal-sheet .modal-footer {
+      padding-bottom: 2rem;
+    }
+
+    .modal-alert .modal-dialog {
+      width: 380px;
+    }
+
+    .modal-tour .modal-dialog {
+      width: 380px;
+    }
+
+    .center-modal .modal-dialog {
+      margin: 1.75rem auto;
+    }
   </style>
   <body>
     <header>
@@ -459,7 +479,7 @@
     </main>
 
     <!-- MODEL -->
-    <div
+    <!-- <div
       class="modal fade"
       id="exampleModal"
       tabindex="-1"
@@ -496,7 +516,52 @@
           </div>
         </div>
       </div>
+    </div> -->
+
+    <!-- <div
+      class="modal fade center-modal"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-3 shadow">
+          <div class="modal-body p-4 text-center">
+            <h5 class="mb-0">Enable this setting?</h5>
+            <p class="mb-0">
+              You can always change your mind in your account settings.
+            </p>
+          </div>
+          <div class="modal-footer flex-nowrap p-0">
+            <button
+              type="button"
+              class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"
+            >
+              <strong>Yes, enable</strong>
+            </button>
+            <button
+              type="button"
+              class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+              data-bs-dismiss="modal"
+            >
+              No thanks
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast">
+      <div class="toast-body">
+        Do you like Chiyeko? Consider donating to help keep the site running.
+        <div class="mt-2 pt-2 border-top">
+          <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='/donate'">Donate</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+        </div>
+      </div>
     </div>
+  </div>
   </body>
 
   <script>
@@ -509,18 +574,20 @@
 
     createCopyright();
 
-    async function showModal() {
-        const show = '<%= showModals %>';
-        if (show === 'false') return;
-        const modal = new bootstrap.Modal(
-            document.getElementById("exampleModal"),
-            {
-            keyboard: false,
-            }
-        );
-        modal.show();
+    async function showModal(n) {
+      const show = "<%= showModals %>";
+      // if (show === 'false') return;
+      const modal = new bootstrap.Modal(document.getElementById(n), {
+        keyboard: false,
+      });
+      modal.show();
     }
 
-    showModal();
+    showModal("exampleModal");
+
+    const toastLiveExample = document.getElementById('liveToast')
+    const toast = new bootstrap.Toast(toastLiveExample)
+      
+    toast.show()
   </script>
 </html>
