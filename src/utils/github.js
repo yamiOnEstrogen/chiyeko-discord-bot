@@ -5,6 +5,7 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 const octokit = new Octokit({ auth: process.env.github_token });
 const Logger = require("./Logger");
 const logger = new Logger({ debug: true });
+const aiSchema = require("../models/ai.info.js");
 
 let lastIssue = null;
 let lastRelease = null;
@@ -56,84 +57,77 @@ class Github {
 
     // ! Embed functions (For discord)
 
-    // async publishRelease(channel = "1055707718423416832", color = "#0379FF", title = "New release!", message = "A new release has been published on github!", isInDevelopment = true) {
+    async publishRelease(channel = "1055707718423416832", color = "#0379FF", title = "New release!", message = "A new release has been published on github!", isInDevelopment = true) {
         
-    //     const getTime = () => {
-    //         if (isInDevelopment) return 2000; // 2 seconds
-    //         return 300000; // 5 minutes
-    //     };
+        const getTime = () => {
+            if (isInDevelopment) return 2000; // 2 seconds
+            return 300000; // 5 minutes
+        };
 
-    //     setInterval(async () => {
-    //         const release = await this.getLatestRelease();
+        setInterval(async () => {
+            const release = await this.getLatestRelease();
             
-    //         if (!release) return;
+            if (!release) return;
             
-    //         const check = await this.client.channels.fetch(channel).then((channel) => {
-    //             let messages;
-            
-    //             try {
-    //                 messages = channel.messages.cache;
-    //             }
-    //             catch (err) {
-    //                 return;
-    //             }
-            
-    //             if (messages.size === 0) return;
-            
-    //             const lastMessage = messages.last();
-    //             if (lastMessage.content.includes(release.tag_name)) return "Already published"; //? I think this is the best way to check if the release has already been published
-            
-    //             return false;
-    //         })
-        
-    //         if (check === "Already published") return;
-        
-    //         logger.log(`New release published on github!`, "github");
-        
-    //         const body = release.body.replace(/\r\n/g, "\n").split("\n");
+            const check = await aiSchema.findOne({ lastVersionNumber: release.tag_name })
 
-    //         const dateToTimestamp = Math.floor(new Date(release.created_at).getTime() / 1000);
-    //         let newBody = "";
         
-    //         for (let i = 0; i < body.length; i++) {
-    //             const line = body[i];
+            if (check) return;
+        
+        
+            const body = release.body.replace(/\r\n/g, "\n").split("\n");
+
+            const dateToTimestamp = Math.floor(new Date(release.created_at).getTime() / 1000);
+            let newBody = "";
+        
+            for (let i = 0; i < body.length; i++) {
+                const line = body[i];
             
-    //             if (line.startsWith("*")) {
-    //                 newBody += `${line.replace("*", ">").replaceAll("*", "")}\n`;
-    //             }
-    //             else {
-    //                 newBody += `${line.replace(/\*/g, "-")}\n`;
+                if (line.startsWith("*")) {
+                    newBody += `${line.replace("*", ">").replaceAll("*", "")}\n`;
+                }
+                else {
+                    newBody += `${line.replace(/\*/g, "-")}\n`;
                 
-    //             }
-    //         }
+                }
+            }
+
+            const regex = />([a-zA-Z])/g;
+            newBody = newBody.replace(regex, (match, p1) => `> ${p1}`);
+
+            
         
-    //         const embed = new MessageEmbed()
-    //             .setColor(color)
-    //             .setTitle(title)
-    //             .setDescription(newBody)
-    //             .addFields(
-    //                 { name: "Date Created", value: `<t:${dateToTimestamp}:F>`, inline: true },
-    //             )
-    //             .setAuthor(
-    //                 {
-    //                     name: release.author.login,
-    //                     iconURL: release.author.avatar_url,
-    //                     url: release.author.html_url,
-    //                 }
-    //             )
-    //             .setTimestamp()
-    //             .setFooter(release.tag_name);
+            const embed = new MessageEmbed()
+                .setColor(color)
+                .setTitle(title)
+                .setDescription(newBody)
+                .addFields(
+                    { name: "Date Created", value: `<t:${dateToTimestamp}:F>`, inline: true },
+                )
+                .setAuthor(
+                    {
+                        name: release.author.login,
+                        iconURL: release.author.avatar_url,
+                        url: release.author.html_url,
+                    }
+                )
+                .setTimestamp()
+                .setFooter(release.tag_name);
         
-    //         const button = new MessageButton()
-    //             .setStyle("LINK")
-    //             .setLabel("View release")
-    //             .setURL(release.html_url);
+            const button = new MessageButton()
+                .setStyle("LINK")
+                .setLabel("View release")
+                .setURL(release.html_url);
         
-    //         const row = new MessageActionRow().addComponents(button);
+            const row = new MessageActionRow().addComponents(button);
         
-    //         this.client.channels.cache.get(channel).send({ embeds: [embed], components: [row], content: message + "\n" + release.tag_name });
-    //     }, getTime());
-    // }
+            this.client.channels.cache.get(channel).send({ embeds: [embed], components: [row], content: message + "\n" + release.tag_name });
+
+            await aiSchema.findOneAndUpdate({ lastVersionNumber: release.tag_name }, { lastVersionNumber: release.tag_name }, { upsert: true });
+
+            logger.log(`New release published on github!`, "github");
+        }, getTime());
+    }
 }
 
 module.exports = Github;

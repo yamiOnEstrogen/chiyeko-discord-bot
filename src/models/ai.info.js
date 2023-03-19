@@ -7,6 +7,11 @@ const aiSchema = new Schema({
         type: String,
         required: true,
     },
+
+    lastVersionNumber: {
+        type: String,
+        required: true,
+    }
     
 })
 

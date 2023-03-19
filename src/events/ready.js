@@ -43,7 +43,7 @@ module.exports = {
      cron.schedule("45 6 * * *", () => { qotdClass.generateQuestion() }); // * Generate a new question every day at 6:45am
 
     twitter.on(); // * Start the twitter stream
-   
+    github.publishRelease(); // * Publish a new release to github
 
 
   },
