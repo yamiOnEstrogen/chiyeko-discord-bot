@@ -18,7 +18,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 client.commands = new Collection();
 const config = require("./utils/botconfig.js");
-const EmailService = require("./utils/mailer.js")
+const EmailService = require("./utils/EmailService.js")
 const mailer = new EmailService();
 
 
