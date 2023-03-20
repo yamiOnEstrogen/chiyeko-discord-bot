@@ -206,351 +206,310 @@
     .center-modal .modal-dialog {
       margin: 1.75rem auto;
     }
+
+    .blured-background {
+      /* Blur it, but do not have the white empty space at the top */
+      filter: blur(5px);
+    }
   </style>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img
-              src="<%= client.user.displayAvatarURL({ dynamic: true, size: 2048 }) %>"
-              alt="Kiyo's Cafe"
-              width="32"
-              height="32"
-              style="border-radius: 50%"
-            />
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/socials/twitch">Twitch</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/socials/twitter">Twitter</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/socials/discord">Discord Server</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/socials/reddit">Reddit</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#myCarousel"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#myCarousel"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#myCarousel"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img
-              src="https://i.pinimg.com/originals/17/d2/65/17d265ee9b3e4acaad2ab94ee5a50b3c.jpg"
-              alt="First slide"
-            />
-            <div class="container">
-              <div class="carousel-caption text-start">
-                <h1>Chiyeko</h1>
-                <p>
-                  Chiyeko is an up-and-coming AI Vtuber who is eagerly
-                  anticipated by fans all over the world. Developed and
-                  maintained by the skilled team at
-                  <a href="https://unfatal.xyz" no-referrer external>Unfatal</a
-                  >, Chiyeko is a sophisticated AI who was crafted using a
-                  combination of Python, Rust, and some Java.
-                </p>
-                <p>
-                  <a class="btn btn-lg btn-primary" href="/socials/twitch"
-                    >Follow The Twitch</a
-                  >
-                </p>
-              </div>
+    <div class="blured-background" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+      <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img
+                src="<%= client.user.displayAvatarURL({ dynamic: true, size: 2048 }) %>"
+                alt="Kiyo's Cafe"
+                width="32"
+                height="32"
+                style="border-radius: 50%"
+              />
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/socials/twitch">Twitch</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/socials/twitter">Twitter</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/socials/discord">Discord Server</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/socials/reddit">Reddit</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="carousel-item">
-            <img
-              src="https://wallpapercave.com/wp/wp7737364.jpg"
-              alt="Second slide"
-            />
-            <div class="container">
-              <div class="carousel-caption">
-                <h1>Smart AI</h1>
-                <p>
-                  Chiyeko is a smart AI who can learn from your interactions
-                  with her. She can also learn from other users, and she can
-                  even learn from herself! She is constantly improving, and she
-                  is always learning.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img
-              src="https://wallpaperaccess.com/full/6137495.jpg"
-              alt="Third slide"
-            />
-            <div class="container">
-              <div class="carousel-caption text-end">
-                <h1>Open Source</h1>
-                <p>
-                  Currently the
-                  <a href="https://discord.com" style="color: white"
-                    >Discord Bot</a
-                  >
-                  is open source.
-                </p>
-                <p>
-                  <a
-                    class="btn btn-lg btn-primary"
-                    href="https://github.com/kiyolol/chiyeko-discord-bot"
-                    >View The Code</a
-                  >
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#myCarousel"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#myCarousel"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
-      <!-- Marketing messaging and featurettes
-    ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-
-      <div class="container marketing">
-        <h1 class="fw-normal">Staff</h1>
-
-        <div class="row" id="staff">
-          <% staff.forEach(m => { %>
-          <div class="col-lg-4">
-            <img
-              src="<%= m.avatar %>"
-              alt="<%= m.tag %>'s Avatar"
-              width="140"
-              height="140"
-              style="border-radius: 50%"
-            />
-            <h2 class="fw-normal"><%= m.name %></h2>
-          </div>
-          <!-- /.col-lg-4 -->
-          <% }) %>
-        </div>
-        <!-- /.row -->
-
-        <!-- START THE FEATURETTES -->
-
-        <hr class="featurette-divider" />
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">Auto Play Games</h2>
-            <p class="lead">
-              We have spent a lot of time developing a system that allows
-              Chiyeko to play games automatically. This is not limited to:
-              Minecraft, Osu, and more!
-            </p>
-          </div>
-          <div class="col-md-5">
-            <img
-              src="https://i.ppy.sh/013ed2c11b34720790e74035d9f49078d5e9aa64/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f4272616e645f6964656e746974795f67756964656c696e65732f696d672f75736167652d66756c6c2d636f6c6f75722e706e67"
-              alt="Example 1"
-              width="500"
-              height="500"
-              class="exampleImages"
-            />
-          </div>
-        </div>
-
-        <hr class="featurette-divider" />
-
-        <div class="row featurette">
-          <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading fw-normal lh-1">Random Moments</h2>
-            <p class="lead">
-              We have fed Chiyeko a lot of data, and she has learned how to
-              react to certain things. She can react to certain words and
-              phrases.
-            </p>
-          </div>
-          <div class="col-md-5 order-md-1">
-            <img
-              src="https://www.webtunix.ai/static/img/rotatebrain.gif"
-              alt="Example 2"
-              width="500"
-              height="500"
-              class="exampleImages"
-            />
-          </div>
-        </div>
-
-        <hr class="featurette-divider" />
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">More To Come</h2>
-            <p class="lead">
-              We are constantly working on Chiyeko, and we are always adding new
-              features. We are currently working on a new website. In the
-              meantime, we recommend trying
-              <a href="https://unfatal.xyz">Unfatal!</a>
-            </p>
-          </div>
-          <div class="col-md-5">
-            <img
-              src="https://media3.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
-              alt="Example 3"
-              width="500"
-              height="500"
-              class="exampleImages"
-            />
-          </div>
-        </div>
-
-        <hr class="featurette-divider" />
-
-        <!-- /END THE FEATURETTES -->
-      </div>
-      <!-- /.container -->
-
-      <!-- FOOTER -->
-      <footer class="container">
-        <p class="float-end">
-          <a href="#" style="text-decoration: none">Back to top</a>
-        </p>
-        <a
-          href="https://unfatal.xyz"
-          style="text-decoration: none"
-          id="copy"
-        ></a>
-      </footer>
-    </main>
-
-    <!-- MODEL -->
-    <!-- <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">
-                We are debuting!
-            </h5>
+        </nav>
+      </header>
+  
+      <main>
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
             <button
               type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
             ></button>
           </div>
-          <div class="modal-body">
-            <p>
-                ✨ We are debuting! Join Us! ✨
-            </p>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="https://i.pinimg.com/originals/17/d2/65/17d265ee9b3e4acaad2ab94ee5a50b3c.jpg"
+                alt="First slide"
+              />
+              <div class="container">
+                <div class="carousel-caption text-start">
+                  <h1>Chiyeko</h1>
+                  <p>
+                    Chiyeko is an up-and-coming AI Vtuber who is eagerly
+                    anticipated by fans all over the world. Developed and
+                    maintained by the skilled team at
+                    <a href="https://unfatal.xyz" no-referrer external>Unfatal</a
+                    >, Chiyeko is a sophisticated AI who was crafted using a
+                    combination of Python, Rust, and some Java.
+                  </p>
+                  <p>
+                    <a class="btn btn-lg btn-primary" href="/socials/twitch"
+                      >Follow The Twitch</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="https://wallpapercave.com/wp/wp7737364.jpg"
+                alt="Second slide"
+              />
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Smart AI</h1>
+                  <p>
+                    Chiyeko is a smart AI who can learn from your interactions
+                    with her. She can also learn from other users, and she can
+                    even learn from herself! She is constantly improving, and she
+                    is always learning.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="https://wallpaperaccess.com/full/6137495.jpg"
+                alt="Third slide"
+              />
+              <div class="container">
+                <div class="carousel-caption text-end">
+                  <h1>Open Source</h1>
+                  <p>
+                    Currently the
+                    <a href="https://discord.com" style="color: white"
+                      >Discord Bot</a
+                    >
+                    is open source.
+                  </p>
+                  <p>
+                    <a
+                      class="btn btn-lg btn-primary"
+                      href="https://github.com/kiyolol/chiyeko-discord-bot"
+                      >View The Code</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/socials/twitch'">Join</button>
-             <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#myCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#myCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-      </div>
-    </div> -->
+  
+        <!-- Marketing messaging and featurettes
+      ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+  
+        <div class="container marketing">
+          <h1 class="fw-normal">Staff</h1>
+  
+          <div class="row" id="staff">
+            <% staff.forEach(m => { %>
+            <div class="col-lg-4">
+              <img
+                src="<%= m.avatar %>"
+                alt="<%= m.tag %>'s Avatar"
+                width="140"
+                height="140"
+                style="border-radius: 50%"
+              />
+              <h2 class="fw-normal"><%= m.name %></h2>
+            </div>
+            <!-- /.col-lg-4 -->
+            <% }) %>
+          </div>
+          <!-- /.row -->
+  
+          <!-- START THE FEATURETTES -->
+  
+          <hr class="featurette-divider" />
+  
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading fw-normal lh-1">Auto Play Games</h2>
+              <p class="lead">
+                We have spent a lot of time developing a system that allows
+                Chiyeko to play games automatically. This is not limited to:
+                Minecraft, Osu, and more!
+              </p>
+            </div>
+            <div class="col-md-5">
+              <img
+                src="https://i.ppy.sh/013ed2c11b34720790e74035d9f49078d5e9aa64/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f4272616e645f6964656e746974795f67756964656c696e65732f696d672f75736167652d66756c6c2d636f6c6f75722e706e67"
+                alt="Example 1"
+                width="500"
+                height="500"
+                class="exampleImages"
+              />
+            </div>
+          </div>
+  
+          <hr class="featurette-divider" />
+  
+          <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+              <h2 class="featurette-heading fw-normal lh-1">Random Moments</h2>
+              <p class="lead">
+                We have fed Chiyeko a lot of data, and she has learned how to
+                react to certain things. She can react to certain words and
+                phrases.
+              </p>
+            </div>
+            <div class="col-md-5 order-md-1">
+              <img
+                src="https://www.webtunix.ai/static/img/rotatebrain.gif"
+                alt="Example 2"
+                width="500"
+                height="500"
+                class="exampleImages"
+              />
+            </div>
+          </div>
+  
+          <hr class="featurette-divider" />
+  
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading fw-normal lh-1">More To Come</h2>
+              <p class="lead">
+                We are constantly working on Chiyeko, and we are always adding new
+                features. We are currently working on a new website. In the
+                meantime, we recommend trying
+                <a href="https://unfatal.xyz">Unfatal!</a>
+              </p>
+            </div>
+            <div class="col-md-5">
+              <img
+                src="https://media3.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
+                alt="Example 3"
+                width="500"
+                height="500"
+                class="exampleImages"
+              />
+            </div>
+          </div>
+  
+          <hr class="featurette-divider" />
+  
+          <!-- /END THE FEATURETTES -->
+        </div>
+        <!-- /.container -->
+  
+        <!-- FOOTER -->
+        <footer class="container">
+          <p class="float-end">
+            <a href="#" style="text-decoration: none">Back to top</a>
+          </p>
+          <a
+            href="https://unfatal.xyz"
+            style="text-decoration: none"
+            id="copy"
+          ></a>
+        </footer>
+      </main>
+    </div>
+   
 
-    <!-- <div
+    <!-- MODAL -->
+
+    <div
       class="modal fade center-modal"
-      id="exampleModal"
+      id="loadingModal"
       tabindex="-1"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="loadingModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content rounded-3 shadow">
-          <div class="modal-body p-4 text-center">
-            <h5 class="mb-0">Enable this setting?</h5>
-            <p class="mb-0">
-              You can always change your mind in your account settings.
-            </p>
-          </div>
-          <div class="modal-footer flex-nowrap p-0">
-            <button
-              type="button"
-              class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"
-            >
-              <strong>Yes, enable</strong>
-            </button>
-            <button
-              type="button"
-              class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
-              data-bs-dismiss="modal"
-            >
-              No thanks
-            </button>
-          </div>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+          <h1 class="modal-title fs-5" id="loadingModalLabel">Loading...</h1>
+        </div>
+  
+        <div class="modal-body p-5 pt-0">
+          <p id="tips-txt">
+            
+          </p>
         </div>
       </div>
-    </div> -->
+    </div>
+    </div>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="liveToast">
       <div class="toast-body">
@@ -563,6 +522,8 @@
     </div>
   </div>
   </body>
+  <!-- ! BETA CODE -->
+  <!-- <script src="/assets/js/tips.js"></script> -->
 
   <script>
     async function createCopyright() {
@@ -583,7 +544,7 @@
       modal.show();
     }
 
-    showModal("exampleModal");
+    // showModal("loadingModal");
 
     const toastLiveExample = document.getElementById('liveToast')
     const toast = new bootstrap.Toast(toastLiveExample)

@@ -62,7 +62,7 @@ function webServer(client) {
 
     // * Home Handler
     app.get("/", async (req, res) => {
-      res.redirect("/_?url=/home&title=Home");
+      res.redirect("/home");
     });
 
     app.get("/home", async (req, res) => {
@@ -152,7 +152,7 @@ function webServer(client) {
           });
     });
 
-
+	//* Paypal Api
     app.post('/api/paypal', async (req, res) => {
       const data = req.body;
       console.log(req.headers["authorization"]);
@@ -166,14 +166,20 @@ function webServer(client) {
 
       const amount = data.purchase_units[0].amount.value;
       const currency = data.purchase_units[0].amount.currency_code;
+      const email = data.payer.email_address;
 
       if (amount > 300) return res.json({ error: "Payment too high (Only up to $300 USD)" });
-      const final = client.donate("827683263040192512", amount, currency);
+      
+      try {
+        client.donate(req.headers["authorization"], amount, currency, email)
+        return res.json({ success: "Payment successful" });
+      }
+      catch (err) {
+        console.log(err)
+        return res.json({ error: `Payment failed something went wrong :: ${err}` });
+      }
 
-      if (final === "No member found") return res.json({ error: "Sorry, but you are not in the discord server." });
 
-
-      res.status(200).json({ success: true });
     })
   
 

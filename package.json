@@ -36,6 +36,7 @@
     "mongoose": "6.6.0",
     "node-cron": "^3.0.2",
     "node-fetch": "^2.6.9",
+    "nodemailer": "^6.9.1",
     "nodemon": "^2.0.20",
     "twit": "^2.2.11",
     "url": "^0.11.0"

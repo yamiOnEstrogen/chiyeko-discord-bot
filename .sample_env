@@ -21,3 +21,9 @@ logChannel =
 github_token = 
 github_repo = 
 github_owner = 
+
+
+# Misc
+
+email = 
+email_pass = 

@@ -95,6 +95,9 @@ Start the bot
     * `github_token` - The token for the github api || [LINK](https://github.com/settings/tokens)
     * `github_repo` - The repo for the github api || [LINK](https://github.com/kiylol/chiyeko-discord-bot)
     * `github_owner` - The username for the github api || [LINK](https://github.com/kiylol)
+    ## Email Stuff
+    * `email` - The email address for node mailer || [LINK](https://www.google.com/settings/security/lesssecureapps)
+    * `email_password` - The password for node mailer || [LINK](https://www.google.com/settings/security/lesssecureapps)
 
  
 *   **/utils/botconfig.js**
