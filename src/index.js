@@ -38,7 +38,7 @@ client.socials = [
   },
   {
     name: "Discord",
-    url: "https://discord.gg/ZuPHXurZvn",
+    url: "https://discord.gg/RyzuKecPX8",
   },
   {
     name: "Reddit",
