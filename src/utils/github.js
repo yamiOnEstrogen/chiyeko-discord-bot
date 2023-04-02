@@ -141,9 +141,9 @@ class Github {
                         lastVersionNumber: release.tag_name,
                     }).save();
                 }
-                else {
-                    
-                    await aiSchema.findOneAndDelete({ lastVersionNumber: release.tag_name });
+                else {                    
+                    doc.lastVersionNumber = release.tag_name;
+                    doc.save();
                 }
             })
 

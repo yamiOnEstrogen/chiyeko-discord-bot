@@ -5,12 +5,12 @@ const { Schema } = mongoose;
 const aiSchema = new Schema({
     lastTweet: {
         type: String,
-        required: true,
+        required: false,
     },
 
     lastVersionNumber: {
         type: String,
-        required: true,
+        required: false,
     },
 
 

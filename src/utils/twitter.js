@@ -56,81 +56,82 @@ class Twitter {
   }
 
   async on(isDev = false) {
-    if (process.env.api_key === undefined) return;
-    const time = () => {
-      if (isDev) return 2000;
-      else return 10000;
-    }
+    return "function is disabled for now"
+    // if (process.env.api_key === undefined) return;
+    // const time = () => {
+    //   if (isDev) return 2000;
+    //   else return 10000;
+    // }
 
-    setInterval(async () => {
-      const user = await getIdFromUsername(this.user);
-      const uId = user.data.id;
+    // setInterval(async () => {
+    //   const user = await getIdFromUsername(this.user);
+    //   const uId = user.data.id;
 
-      if (isDev) console.log(user);
-
-
-
-
-
-      const url = `https://api.twitter.com/2/users/${uId}/tweets?max_results=5`; //! The `max_results` query parameter value [1] is not between 5 and 100
-      const config = {
-        headers: {
-          Authorization: `Bearer ${process.env.api_key}`,
-        },
-      };
-
-      const response = await axios.get(url, config).catch((err) => {
-        logger.log(err, "twitter");
-      })
-
-      const tweet = response.data.data[0];
-
-      if (isDev) console.log(tweet);
-
-      if (tweet.text.startsWith("RT")) return;
-
-      const tData = await getTweetData(tweet.id).then((url) => {
-        return url;
-      })
-
-      if (isDev) console.log(tData);
-
-      await aiSchema.findOne({ lastTweet: tweet.id }).then(async (ai) => {
-        if (isDev) console.log(ai);
-        if (ai) return;
-
-        await aiSchema.findOneAndUpdate({ lastTweet: tweet.id }, { lastTweet: tweet.id }, { upsert: true });
-
-        const embed = new MessageEmbed()
-          .setTitle(`${user.data.name} (@${user.data.username})`)
-          .setDescription(tweet.text)
-          .setURL(`https://twitter.com/${user.data.username}/status/${tweet.id}`)
-          .setThumbnail(user.data.image)
-
-          .setColor("RANDOM");
-
-        if (tData.includes) {
-          if (tData.includes.media) {
-            tData.includes.media.forEach((media) => {
-              embed.setImage(media.url);
-            })
-          }
-        }
+    //   if (isDev) console.log(user);
 
 
 
-        const row = new MessageActionRow().addComponents(
-          new MessageButton()
-            .setStyle("LINK")
-            .setLabel("View Tweet")
-            .setURL(`https://twitter.com/${user.data.username}/status/${tweet.id}`)
-        );
 
-        this.client.channels.cache.get("1005920559944712433").send({ embeds: [embed], components: [row] });
+
+    //   const url = `https://api.twitter.com/2/users/${uId}/tweets?max_results=5`; //! The `max_results` query parameter value [1] is not between 5 and 100
+    //   const config = {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.api_key}`,
+    //     },
+    //   };
+
+    //   const response = await axios.get(url, config).catch((err) => {
+    //     logger.log(err, "twitter");
+    //   })
+
+    //   const tweet = response.data.data[0];
+
+    //   if (isDev) console.log(tweet);
+
+    //   if (tweet.text.startsWith("RT")) return;
+
+    //   const tData = await getTweetData(tweet.id).then((url) => {
+    //     return url;
+    //   })
+
+    //   if (isDev) console.log(tData);
+
+    //   await aiSchema.findOne({ lastTweet: tweet.id }).then(async (ai) => {
+    //     if (isDev) console.log(ai);
+    //     if (ai) return;
+
+    //     await aiSchema.findOneAndUpdate({ lastTweet: tweet.id }, { lastTweet: tweet.id }, { upsert: true });
+
+    //     const embed = new MessageEmbed()
+    //       .setTitle(`${user.data.name} (@${user.data.username})`)
+    //       .setDescription(tweet.text)
+    //       .setURL(`https://twitter.com/${user.data.username}/status/${tweet.id}`)
+    //       .setThumbnail(user.data.image)
+
+    //       .setColor("RANDOM");
+
+    //     if (tData.includes) {
+    //       if (tData.includes.media) {
+    //         tData.includes.media.forEach((media) => {
+    //           embed.setImage(media.url);
+    //         })
+    //       }
+    //     }
+
+
+
+    //     const row = new MessageActionRow().addComponents(
+    //       new MessageButton()
+    //         .setStyle("LINK")
+    //         .setLabel("View Tweet")
+    //         .setURL(`https://twitter.com/${user.data.username}/status/${tweet.id}`)
+    //     );
+
+    //     this.client.channels.cache.get("1005920559944712433").send({ embeds: [embed], components: [row] });
         
-      });
+    //   });
 
-    }, time()); // ! Hardcoded value because I don't want to make it a parameter
+    // }, time()); // ! Hardcoded value because I don't want to make it a parameter
   }
 
   async getTweets() {
