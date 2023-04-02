@@ -1,0 +1,31 @@
+{
+  "version": 7,
+  "backups": [
+    {
+      "name": "Artic Forest Verify",
+      "messages": [
+        {
+          "data": {
+            "content": "How to verify:",
+            "embeds": [
+              {
+                "title": "Verify",
+                "description": "To Gain Access to **The Artic Forest** please type the command `c.verify`\n\nThis will let you gain access to channels like:\n\n> 🎉・giveaways\n> 🐦・twitter\n> 🎊・events\n> 🤖・github\n\n+ many more",
+                "color": 5814783,
+                "author": {
+                  "name": "Naruto Cat",
+                  "icon_url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                },
+                "thumbnail": {
+                  "url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                }
+              }
+            ],
+            "attachments": []
+          },
+          "reference": ""
+        }
+      ]
+    }
+  ]
+}

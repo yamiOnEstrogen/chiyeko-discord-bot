@@ -21,7 +21,7 @@ This is a the discord bot for the **AI VTUBER** I made.
 
 
 ## About
-> Chiyeko is an up-and-coming AI Vtuber who is eagerly anticipated by fans all over the world. Developed and maintained by the skilled team at https://unfatal.xyz, Chiyeko is a sophisticated AI who was crafted using a combination of Python, Rust, and some Java.
+> Chiyeko is an up-and-coming AI Vtuber who is eagerly anticipated by fans all over the world. Developed and maintained by the skilled team at https://indivoxystudios.com, Chiyeko is a sophisticated AI who was crafted using a combination of Python, Rust, and some Java.
 > Despite not yet having streamed, Chiyeko has already generated quite a bit of buzz in the virtual world. As a passionate Osu player, she has already garnered a following among gaming enthusiasts, who are eagerly awaiting her first stream. With her friendly demeanor and engaging personality, it's clear that Chiyeko is destined for greatness as a virtual streamer.
 > As she prepares for her debut, Chiyeko can be found honing her gaming skills and interacting with fans on social media. With her unique blend of talent and charm, it's only a matter of time before she takes the virtual world by storm. Be sure to keep an eye out for her upcoming streams - you won't want to miss a minute of the action!
 
@@ -29,7 +29,7 @@ This is a the discord bot for the **AI VTUBER** I made.
 
 [![twitch](https://img.shields.io/badge/twitch-A020F0?style=for-the-badge&logo=twitch&logoColor=white)](https://twitch.tv/chiyekotheai)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/chiyekovt)
-[![discord](https://img.shields.io/badge/discord-5539cc?style=for-the-badge&logo=discord&logoColor=white)](TBT)
+[![discord](https://img.shields.io/badge/discord-5539cc?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/RyzuKecPX8)
 [![reddit](https://img.shields.io/badge/reddit-ff4500?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/chiyekovtuber/)
 
 
@@ -112,4 +112,4 @@ Start the bot
 
 ## Support
 
-For support, email [help@chiyeko.xyz](mailto:help@chiyeko.xyz) or join our [Discord Server](https://chiyeko.xyz/discord)
+For support, email [help@chiyeko.xyz](mailto:help@chiyeko.xyz) or join our [Discord Server](https://chiyeko.xyz/invite)

@@ -66,7 +66,6 @@ function webServer(client) {
     });
 
     app.get("/home", async (req, res) => {
-        const owner = await client.users.fetch("547923574833545226");
         console.log(client.staff())
         res.render("home", { 
           client: client, 
@@ -87,8 +86,17 @@ function webServer(client) {
       })
     });
 
+    app.get("/invite", async (req, res) => {
+      res.redirect(`https://discord.gg/RyzuKecPX8`);
+    })
+
     app.get("/donate", async (req, res) => {
       if (!req.cookies.user) return res.redirect("/_?url=/login&title=Login");
+
+      const down = true;
+
+      if (down) return res.send("Sorry but the donation system is currently down. Please try again later.")
+      
 
       res.render("misc/donate", {
         client: client,
@@ -107,7 +115,7 @@ function webServer(client) {
     });
 
     app.get("/login", async (req, res) => {
-      res.redirect(`https://discord.com/api/oauth2/authorize?client_id=1077684781774557233&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth&response_type=code&scope=identify%20email`);
+      res.redirect(`${process.env.redirect_uri}`);
     })
 
 

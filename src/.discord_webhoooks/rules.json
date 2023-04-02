@@ -1,0 +1,55 @@
+{
+  "version": 7,
+  "backups": [
+    {
+      "name": "Artic Forest Rules",
+      "messages": [
+        {
+          "data": {
+            "content": null,
+            "embeds": [
+              {
+                "title": "Rules",
+                "description": "Failure to follow any of these rules gives Staff the right to Mute, or kick you; in extreme cases, even a ban.\n\nIf someone is violating the rules, and staff fail to resolve the issue: Please report it to one of the Administrators (<@&1091909342736957460>)",
+                "color": 5814783,
+                "author": {
+                  "name": "Naruto Cat",
+                  "icon_url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                },
+                "thumbnail": {
+                  "url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                }
+              },
+              {
+                "title": "Server Guidelines | Text Rules",
+                "description": "#1\nFollow Discord Tos: [Terms](https://discordapp.com/terms) | [Guidelines](https://discordapp.com/guidelines)\n\n#2\nBe respectful: Treat everyone with respect, even if you disagree with them. Do not use hate speech or discriminatory language.\n\n#3\nNo spamming: Do not spam the chat with repeated messages or links. If you want to share a link, make sure it's relevant to the conversation.\n\n#4\nNo NSFW content: Do not share any sexually explicit or inappropriate content in the server.\n\n#5\nNo trolling: Do not intentionally provoke or harass other members of the server.\n\n#6\nKeep conversations on the topic: Stay on topic in the channel you're in. If you want to talk about something else, start a new conversation in a different channel.\n\n#7\nNo self-promotion: Do not promote your own content or server without permission from the server owner.\n\n#8\nNo sharing personal information: Do not share personal information about yourself or others in the server.\n\n#9\nUse appropriate language: Do not use excessive swearing or vulgar language in the server.\n\n#10\nUse English: Use English as the primary language in the server. This ensures that everyone can participate in the conversation. (<#1091931702898729062> for French, Japanese, and Chinese as we have Staff Members who speak the language.)\n\n#11\nRespect privacy: Do not share personal information or conversations without permission.\n\n#12\nDo not discuss illegal activities: Do not discuss or promote illegal activities in the server.",
+                "color": 5814783,
+                "author": {
+                  "name": "Naruto Cat",
+                  "icon_url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                },
+                "thumbnail": {
+                  "url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                }
+              },
+              {
+                "title": "Server Guidelines | Voice Rules",
+                "description": "#1\nNo voice chat channel hopping.\n\n#2\nNo annoying, loud, or high pitch noises.\n\n#3\nReduce the amount of background noise, if possible.\n\n#4\nModerators reserve the right to disconnect you from a voice channel if your sound quality is poor.\n\n#5\nModerators reserve the right to disconnect, mute, deafen, or move members to and from voice channels.\n\n#6\nDo not use voice changers: Do not use voice changers to disguise your voice or impersonate someone else.\n\n#7\nRespect privacy: Do not record or share voice conversations without permission.",
+                "color": 5814783,
+                "author": {
+                  "name": "Naruto Cat",
+                  "icon_url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                },
+                "thumbnail": {
+                  "url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                }
+              }
+            ],
+            "attachments": []
+          },
+          "reference": ""
+        }
+      ]
+    }
+  ]
+}

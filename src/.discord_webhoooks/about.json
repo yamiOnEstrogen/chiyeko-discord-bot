@@ -1,0 +1,34 @@
+{
+  "version": 7,
+  "backups": [
+    {
+      "name": "Artic Forest About",
+      "messages": [
+        {
+          "data": {
+            "content": null,
+            "embeds": [
+              {
+                "title": "About",
+                "description": "Welcome to **The Arctic Forest** Discord server, the official community server for Chiyeko, an AI-powered VTuber! We're excited to have you here as we embark on this journey together.\n\nHere in **The Arctic Forest,** you'll find a friendly and supportive community that is dedicated to all things Chiyeko. From updates on her pre-debut status to discussions about her favorite games and activities, we have channels for everything related to Chiyeko and her VTuber journey.",
+                "color": 5814783,
+                "author": {
+                  "name": "Naruto Cat",
+                  "icon_url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                },
+                "footer": {
+                  "text": "Thank you for joining The Arctic Forest, and we look forward to getting to know you better!"
+                },
+                "thumbnail": {
+                  "url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                }
+              }
+            ],
+            "attachments": []
+          },
+          "reference": ""
+        }
+      ]
+    }
+  ]
+}

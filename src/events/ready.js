@@ -15,7 +15,6 @@ module.exports = {
     const qotdClass = new qotd(client); // * Create a new instance of the qotd class
     const twitter = new Twitter(client); // * Create a new instance of the twitter class
     const github = new Github(client); // * Create a new instance of the github class
-
     console.clear();
     logger.log(`Logged in as ${client.user.tag}!`); // * Log the bot's tag
     logger.log(`Ready to serve a total of ${client.users.cache.size} users.`); // * Log the amount of users the bot is serving
@@ -40,9 +39,9 @@ module.exports = {
 
     Levels.setURL(process.env.db);
 
-     cron.schedule("45 6 * * *", () => { qotdClass.generateQuestion() }); // * Generate a new question every day at 6:45am
+     // cron.schedule("45 6 * * *", () => { qotdClass.generateQuestion() }); // * Generate a new question every day at 6:45am
 
-    twitter.on(); // * Start the twitter stream
+    // twitter.on(); // * Start the twitter stream
     github.publishRelease(); // * Publish a new release to github
 
 

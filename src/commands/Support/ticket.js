@@ -4,7 +4,7 @@ const axios = require("axios").default;
 const wait = require("util").promisify(setTimeout);
 const channelData = {
     staffRole: ["1006952317679046723", "996941131591974982"],
-    ticketParent: process.env.ticketParent,
+    //ticketParent: process.env.ticketParent,
 }
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
 
         const ticketChannel = await guild.channels.create(`ticket-${interaction.user.username}`, {
             type: "GUILD_TEXT",
-            parent: channelData.ticketParent,
+            // parent: channelData.ticketParent,
             topic: `Ticket ID: ${createId()}`,
             permissionOverwrites: [
                 {

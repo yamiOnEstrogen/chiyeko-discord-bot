@@ -33,10 +33,7 @@ module.exports = {
         await member.guild.channels.cache.get(botConfig.welcomeChannel).send({ embeds: [embed] });
 
         logger.log(`New member: ${member.user.tag}`);
-
-        await interaction.member.roles.add(botConfig.memberRole);
-
-        logger.log(`Added member role to ${member.user.tag}`);
+        logger.log(`Awating verification...`)
 
 
        

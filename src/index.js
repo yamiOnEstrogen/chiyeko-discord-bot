@@ -210,40 +210,44 @@ for (const file of eventFiles) {
 }
 
 
+client.formatNumbers = (number) => {
+  if (!number) return "0";
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 
 
-client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
+// client.on("messageCreate", async (message) => {
+//   if (message.author.bot) return;
 
-  const userSchema = require("./models/user");
+//   const userSchema = require("./models/user");
 
-  // Check if the author mentioned a user
-  if (!message.mentions.users.first()) return;
+//   // Check if the author mentioned a user
+//   if (!message.mentions.users.first()) return;
 
-  // Get the mentioned user
-  const mentionedUser = message.mentions.users.first();
+//   // Get the mentioned user
+//   const mentionedUser = message.mentions.users.first();
 
-  // Check if the mentioned user is a bot
-  if (mentionedUser.bot) return;
+//   // Check if the mentioned user is a bot
+//   if (mentionedUser.bot) return;
 
-  const user = await userSchema.findOne({
-    discordId: mentionedUser.id,
-  });
+//   const user = await userSchema.findOne({
+//     discordId: mentionedUser.id,
+//   });
 
 
-  if (!user.isAfk) return;
-  if (message.guildId != config.guildID) return;
+//   if (!user.isAfk) return;
+//   if (message.guildId != config.guildID) return;
 
-  message.delete();
+//   message.delete();
 
-  message.channel.send({
-    content: `${mentionedUser.username} is currently AFK. Reason: ${user.afkReason}`,
-  }).then((msg) => {
-    setTimeout(() => msg.delete(), 5000);
-  });
-});
+//   message.channel.send({
+//     content: `${mentionedUser.username} is currently AFK. Reason: ${user.afkReason}`,
+//   }).then((msg) => {
+//     setTimeout(() => msg.delete(), 5000);
+//   });
+// });
 
 
 client.login(process.env.token);

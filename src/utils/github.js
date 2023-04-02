@@ -55,9 +55,21 @@ class Github {
         return releases.data[0];
     }
 
+    async getLatestPullRequest() {
+        const pullRequests = await octokit.request("GET /repos/{owner}/{repo}/pulls", {
+            owner: this.username,
+            repo: this.repo,
+        });
+
+        if (pullRequests.status !== 200) return null;
+        if (pullRequests.data.length === 0) return "No pull requests found";
+
+        return pullRequests.data[0];
+    }
+
     // ! Embed functions (For discord)
 
-    async publishRelease(channel = "1055707718423416832", color = "#0379FF", title = "New release!", message = "A new release has been published on github!", isInDevelopment = false) {
+    async publishRelease(channel = "1091915646037667931", color = "#0379FF", title = "New release!", message = "A new release has been published on github!", isInDevelopment = true) {
         
         const getTime = () => {
             if (isInDevelopment) return 2000; // 2 seconds
@@ -121,13 +133,25 @@ class Github {
         
             const row = new MessageActionRow().addComponents(button);
         
-            this.client.channels.cache.get(channel).send({ embeds: [embed], components: [row], content: message + "\n" + release.tag_name });
+            this.client.channels.cache.get(channel).send({ embeds: [embed], components: [row], content: message + "\n" + "<@&1091906621287956590>" });
 
-            await aiSchema.findOneAndUpdate({ lastVersionNumber: release.tag_name }, { lastVersionNumber: release.tag_name }, { upsert: true });
+            await aiSchema.findOne({ lastVersionNumber: release.tag_name }).then(async (doc) => {
+                if (!doc) {
+                    await new aiSchema({
+                        lastVersionNumber: release.tag_name,
+                    }).save();
+                }
+                else {
+                    
+                    await aiSchema.findOneAndDelete({ lastVersionNumber: release.tag_name });
+                }
+            })
 
             logger.log(`New release published on github!`, "github");
         }, getTime());
     }
+
+   
 }
 
 module.exports = Github;

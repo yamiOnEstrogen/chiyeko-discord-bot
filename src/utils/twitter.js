@@ -56,6 +56,7 @@ class Twitter {
   }
 
   async on(isDev = false) {
+    if (process.env.api_key === undefined) return;
     const time = () => {
       if (isDev) return 2000;
       else return 10000;

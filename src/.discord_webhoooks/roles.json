@@ -1,0 +1,31 @@
+{
+  "version": 7,
+  "backups": [
+    {
+      "name": "Artic Forest Roles",
+      "messages": [
+        {
+          "data": {
+            "content": null,
+            "embeds": [
+              {
+                "title": "Roles",
+                "description": "**PINGS**\n\n🐦 : <@&1091906489729433682> \n🤖 : <@&1091906621287956590> \n🎥 : <@&1091906351178985482> \n🎉 : <@&1091906560072106004>\n\n\n**PRONOUNS**\n👩 : <@&1091907234767839343> \n👨 : <@&1091907312161140836> \n🦉 : <@&1091907448161456168> \n⭕ : <@&1091907517627519007> \n\n\n**DMS**\n🔓 : <@&1091906000438706197> \n🔒 : <@&1091906109486403754>\n🔐 : <@&1091906181120938035>",
+                "color": 5814783,
+                "author": {
+                  "name": "Naruto Cat",
+                  "icon_url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                },
+                "thumbnail": {
+                  "url": "https://cdn.discordapp.com/attachments/1015727807566987296/1091925184816103545/meme.gif"
+                }
+              }
+            ],
+            "attachments": []
+          },
+          "reference": ""
+        }
+      ]
+    }
+  ]
+}

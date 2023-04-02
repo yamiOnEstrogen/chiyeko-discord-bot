@@ -9,13 +9,18 @@ module.exports = {
         .addStringOption(option =>
             option.setName('emoji')
                 .setDescription('The emoji to steal')
-                .setRequired(true)),
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('name')
+                .setDescription('The name of the emoji')
+                .setRequired(false)),
     category: "Admin",
     async execute(interaction) {
 
         if (!interaction.member.permissions.has('MANAGE_EMOJIS')) return interaction.reply({ content: 'You do not have permission to use this command!', ephemeral: true });
 
 		const emoji = interaction.options.getString('emoji');
+
 
 
 
@@ -32,7 +37,7 @@ module.exports = {
 
         const url = `https://cdn.discordapp.com/emojis/${emojiID}.${animated ? 'gif' : 'png'}`;
 
-        const name = emoji.match(emojiRegex)[0].split(':')[1];
+        const name = interaction.options.getString('name') || emoji.match(emojiRegex)[0].split(':')[1];
 
         const guild = interaction.guild;
 
