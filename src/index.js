@@ -102,7 +102,7 @@ client.github = (commits) => {
           .setStyle("LINK")
       );
 
-      const githubChannel = client.channels.cache.get("1091920227832447096");
+      const githubChannel = client.channels.cache.get("1091915646037667931");
 
       githubChannel.send({ embeds: [embed], components: [row], content: "<@&1091906621287956590>" });
 }
