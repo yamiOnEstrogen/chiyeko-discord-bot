@@ -1,7 +1,7 @@
 {
   "name": "chiyeko-ai-bot",
   "version": "1.0.0",
-  "description": "The discord bot for the twitter account @chiyekovt",
+  "description": "The discord bot for the twitter account @chiyekovt || AI VTUBER",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
