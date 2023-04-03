@@ -74,7 +74,6 @@ function webServer(client) {
         console.log(client.staff())
         res.render("home", { 
           client: client, 
-          owner: owner,
           staff: client.staff(),
           showModals: false,
         });
