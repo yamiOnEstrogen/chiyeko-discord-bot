@@ -174,12 +174,12 @@ client.donate = (id, amount, code, email) => {
             new MessageButton()
               .setLabel("Discord Server")
               .setStyle("LINK")
-              .setURL("https://discord.gg/ZuPHXurZvn")
+              .setURL("https://discord.gg/RyzuKecPX8")
               .setEmoji("🎉"),
             new MessageButton()
               .setLabel("Supporter Chat")
               .setStyle("LINK")
-              .setURL("https://discord.com/channels/981632132701126726/1005920559944712433")
+              .setURL("https://discord.com/channels/1091905976619249724/1091918587809243166")
               .setEmoji("💬")
           );
 
@@ -212,12 +212,12 @@ client.donate = (id, amount, code, email) => {
                 new MessageButton()
                   .setLabel('Discord Server')
                   .setStyle('LINK')
-                  .setURL('https://discord.gg/ZuPHXurZvn')
+                  .setURL('https://discord.gg/RyzuKecPX8')
                   .setEmoji('🎉'),
                 new MessageButton()
                   .setLabel('Supporter Chat')
                   .setStyle('LINK')
-                  .setURL('https://discord.com/channels/981632132701126726/1005920559944712433')
+                  .setURL('https://discord.com/channels/1091905976619249724/1091918587809243166')
                   .setEmoji('💬'),
           );
 
