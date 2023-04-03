@@ -94,10 +94,6 @@ client.github = (commits) => {
 
     )
 
-    commits.forEach((commitData) => {
-      embed.addField(`${getNormalCommitMessage(commitData.message)}`, `\u200B`)
-    });
-
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
