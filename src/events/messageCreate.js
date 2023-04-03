@@ -13,9 +13,11 @@ const generateVerifyCode = () => {
     return code;
 };
 
-const hallOfFame = require("../models/hallOfFame.js");
+const MemesSchema = require("../models/memes.js");
+const FanArtSchema = require("../models/fanart.js");
 
 const memeChannel = "1091917541548490762";
+const fanartChannel = "1091917731852464210";
 
 module.exports = {
     name: 'messageCreate',
@@ -58,9 +60,9 @@ module.exports = {
 
                 const attachmentId = attachment.id;
 
-                await hallOfFame.findOne({ Id: attachmentId }).then(async (result) => {
+                await MemesSchema.findOne({ Id: attachmentId }).then(async (result) => {
                     if (!result) {
-                        const newMeme = new hallOfFame({
+                        const newMeme = new MemesSchema({
                             attachment: attachment.url,
                             mid: message.id,
                             user: message.author.id,
@@ -79,6 +81,35 @@ module.exports = {
                 
 
             }
+
+            if (message.channel.id === fanartChannel) {
+                const attachment = message.attachments.first();
+                if (!attachment) return;
+
+                message.react('<:upvote:1092176040996126740>');
+                message.react('<:downvote:1092176072453402665>');
+
+                const attachmentId = attachment.id;
+
+                await FanArtSchema.findOne({ Id: attachmentId }).then(async (result) => {
+                    if (!result) {
+                        const newFanArt = new FanArtSchema({
+                            attachment: attachment.url,
+                            mid: message.id,
+                            user: message.author.id,
+                        })
+
+                        await newFanArt.save();
+
+                        logger.log(`New fanart added to the database!`, "fanart client");
+                    }
+                    else {
+                        logger.log(`Fanart already exists in the database!`, "fanart client");
+
+                    }
+                })
+            }
+
         }
 
         const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -135,7 +166,7 @@ module.exports = {
 
         if (command === "meme") {
             if (message.member.roles.cache.has("1091909117829984336")) {
-                await hallOfFame.find({}).then(async (result) => {
+                await MemesSchema.find({}).then(async (result) => {
                     if (result.length === 0) {
                         message.reply({ content: "There are no memes in the database!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
                         return;
@@ -163,9 +194,50 @@ module.exports = {
                           await message.client.channels.cache.get(memeOfTheWeek).send({ embeds: [embed], content: message2 });
 
                         //   Delete everything
-                        await hallOfFame.deleteMany({});
+                        await MemesSchema.deleteMany({});
 
                         logger.log(`Memes have been deleted!`, "meme client");
+
+                    }
+                })
+            }
+            else {
+                message.reply({ content: "You do not have permission to use this command!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
+            }
+        }
+
+        if (command === "fanart") {
+            if (message.member.roles.cache.has("1091909117829984336")) {
+                await FanArtSchema.find({}).then(async (result) => {
+                    if (result.length === 0) {
+                        message.reply({ content: "There are no fanart in the database!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
+                        return;
+                    }
+                    else {
+                        const mostUpvoted = result.sort((a, b) => b.upvotes - a.upvotes)[0];
+                        
+                        const fanartOfTheWeek = "1091915883514961950";
+
+                        const message2 = "@everyone, we have a new fanart of the week!\nAuthor: <@!" + mostUpvoted.user + ">\n";
+
+                        
+
+                        const embed = new MessageEmbed()
+                          .setImage(mostUpvoted.attachment)
+                          .setDescription(`**Upvotes:** ${mostUpvoted.upvotes}\n**Downvotes:** ${mostUpvoted.downvotes}`)
+                          .setAuthor(
+                            {
+                                name: message.client.getUser(mostUpvoted.user).tag,
+                                iconURL: message.client.getUser(mostUpvoted.user).displayAvatarURL()
+                            }
+                          )
+
+                          await message.client.channels.cache.get(fanartOfTheWeek).send({ embeds: [embed], content: message2 });
+
+                        //   Delete everything
+                        await FanArtSchema.deleteMany({});
+
+                       logger.log(`Fanarts have been deleted!`, "fanart client");
 
                     }
                 })

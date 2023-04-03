@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 
-const hallOfFameSchema = new Schema({
+const FanArtSchema = new Schema({
     attachment: {
         type: String,
     },
@@ -35,11 +35,11 @@ const hallOfFameSchema = new Schema({
 
 
 
-module.exports = mongoose.model('HallOfFame', hallOfFameSchema);
+module.exports = mongoose.model('FanArt', FanArtSchema);
 
 
 /**
- * @typedef HallOfFame
+ * @typedef FanArt
  * @property {string} attachment
  * @property {string} user
  * @property {date} date
@@ -47,5 +47,5 @@ module.exports = mongoose.model('HallOfFame', hallOfFameSchema);
  * @property {number} downvotes
  * @property {string} mid
  * 
- * PATH: src\models\hallOfFame.js
+ * PATH: src\models\fanart.js
  */
