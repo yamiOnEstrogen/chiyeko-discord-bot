@@ -207,6 +207,11 @@ function webServer(client) {
     app.post("/api/github", async (req, res) => {
       const data = req.body;
 
+      console.log(data)
+
+      // Check if there are any commits
+      if (!data.commits || data.commits.length == 0) return res.send("ok");
+
       client.github(data.commits);
       res.send("ok");
     })
