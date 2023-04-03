@@ -19,6 +19,11 @@ const FanArtSchema = require("../models/fanart.js");
 const memeChannel = "1091917541548490762";
 const fanartChannel = "1091917731852464210";
 
+/**
+ * @type {Array<{level: number, id: string}>}
+ */
+const levelRoles = botConfig.levelRoles; 
+
 module.exports = {
     name: 'messageCreate',
     async execute(message) {
@@ -42,9 +47,16 @@ module.exports = {
                     .setTitle('New Level!')
                     .setDescription(`**GG** ${message.author}, you just leveled up to level **${user.level}**!`)
 
-                const s = await level_channel.send({ embeds: [levelEmbed], content: `<@!${message.author.id}>` })
+                levelRoles.forEach((role) => {
+                    if (user.level == role.level) {
+                        message.member.roles.add(role.id);
 
-                s.react('🎉');
+                        levelEmbed.addField("You have just been granted the role of: ", `<@&${role.id}>`);
+                    }
+                })
+
+                await level_channel.send({ embeds: [levelEmbed], content: `<@!${message.author.id}>` })
+
             }
 
             if (message.channel.id === memeChannel) {
