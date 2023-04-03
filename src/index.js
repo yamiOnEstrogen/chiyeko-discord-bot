@@ -86,6 +86,13 @@ client.github = (commits) => {
     )
 
     .setColor("LUMINOUS_VIVID_PINK")
+    .setDescription(
+      // For each commit, add a field with the commit message and the commit id
+      commits.map((commitData) => {
+        return `${getNormalCommitMessage(commitData.message)} [${shortenCommitId(commitData.id)}](${commitData.url})`;
+      }).join("\n")
+
+    )
 
     commits.forEach((commitData) => {
       embed.addField(`${getNormalCommitMessage(commitData.message)}`, `\u200B`)
@@ -99,7 +106,7 @@ client.github = (commits) => {
           .setStyle("LINK")
       );
 
-      const githubChannel = client.channels.cache.get("1091915646037667931");
+      const githubChannel = client.channels.cache.get("1091920227832447096");
 
       githubChannel.send({ embeds: [embed], components: [row], content: "<@&1091906621287956590>" });
 }
