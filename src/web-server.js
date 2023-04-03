@@ -122,7 +122,7 @@ function webServer(client) {
       const endpoint = req.query.url;
       if (!endpoint) {
         //return res.redirect(`${process.env.redirect_uri}`);
-	      return res.send("LOGIN ENPOINT DOWN")
+	      return res.send("LOGIN ENPOINT DOWN");
       }
 
       if (endpoint === "twitch") {
