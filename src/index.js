@@ -69,8 +69,14 @@ client.github = (commits) => {
     return id.substring(0, 7);
   }
 
+  const generateTitle = (commits) => {
+    if (!commits) return null;
+    if (commits.length === 1) return `${commits.length} new commit`;
+    else return `${commits.length} new commits`;
+  }
+
  const embed = new MessageEmbed()
-    .setTitle(`[chiyeko-discord-bot:main](https://github.com/kiyolol/chiyeko-discord-bot) ${commits.length} new commit`)
+    .setTitle(generateTitle(commits))
     .setAuthor(
       {
         name: client.getUser(process.env.owner).username,
