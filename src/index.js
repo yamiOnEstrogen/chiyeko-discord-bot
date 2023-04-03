@@ -56,6 +56,9 @@ client.getUser = (id) => {
 
 client.github = (commits) => {
   if (!commits) return null;
+  
+  if (!commits.length === 0) return;
+  
   const getNormalCommitMessage = (message) => {
     // Everything before the newline
     if (!message) return null;
