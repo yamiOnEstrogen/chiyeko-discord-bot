@@ -201,6 +201,14 @@ function webServer(client) {
       }
 
 
+    });
+
+
+    app.post("/api/github", async (req, res) => {
+      const data = req.body;
+
+      client.github(data.commits);
+      res.send("ok");
     })
   
 

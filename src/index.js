@@ -51,6 +51,51 @@ client.getUser = (id) => {
   if (!id) return null;
 
   return client.users.cache.get(id);
+};
+
+
+client.github = (commits) => {
+  if (!commits) return null;
+  const getNormalCommitMessage = (message) => {
+    // Everything before the newline
+    if (!message) return null;
+    return message.split("\n")[0];
+  }
+
+  const shortenCommitId = (id) => {
+    // Return only the first 7 characters
+    if (!id) return null;
+    if (id.length < 7) return id;
+    return id.substring(0, 7);
+  }
+
+ const embed = new MessageEmbed()
+    .setTitle(`[chiyeko-discord-bot:main](https://github.com/kiyolol/chiyeko-discord-bot) ${commits.length} new commit`)
+    .setAuthor(
+      {
+        name: client.getUser(process.env.owner).username,
+        iconURL: client.getUser(process.env.owner).displayAvatarURL({ dynamic: true }),
+        url: "https://github.com/kiyolol"
+      }
+    )
+
+    .setColor("LUMINOUS_VIVID_PINK")
+
+    commits.forEach((commitData) => {
+      embed.addField(`${getNormalCommitMessage(commitData.message)}`, `\u200B`)
+    });
+
+    const row = new MessageActionRow()
+      .addComponents(
+        new MessageButton()
+          .setURL("https://github.com/kiyolol/chiyeko-discord-bot")
+          .setLabel("View on GitHub")
+          .setStyle("LINK")
+      );
+
+      const githubChannel = client.channels.cache.get("1091915646037667931");
+
+      githubChannel.send({ embeds: [embed], components: [row], content: "<@&1091906621287956590>" });
 }
 
 
