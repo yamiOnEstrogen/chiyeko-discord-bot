@@ -2,7 +2,7 @@
   "name": "chiyeko-ai-bot",
   "version": "1.0.0",
   "description": "The discord bot for the twitter account @chiyekovt",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/deploy.js && node src/index.js",
