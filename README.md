@@ -29,7 +29,7 @@ This is a the discord bot for the **AI VTUBER** I made.
 
 [![twitch](https://img.shields.io/badge/twitch-A020F0?style=for-the-badge&logo=twitch&logoColor=white)](https://twitch.tv/chiyekotheai)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/chiyekovt)
-[![discord](https://img.shields.io/badge/discord-5539cc?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/RyzuKecPX8)
+[![discord](https://img.shields.io/badge/discord-5539cc?style=for-the-badge&logo=discord&logoColor=white)](https://chiyeko.xyz/discord)
 [![reddit](https://img.shields.io/badge/reddit-ff4500?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/chiyekovtuber/)
 
 
