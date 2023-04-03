@@ -75,7 +75,7 @@ function webServer(client) {
         res.render("home", { 
           client: client, 
           staff: client.staff(),
-          showModals: false
+          showModals: false,
         });
     });
 
