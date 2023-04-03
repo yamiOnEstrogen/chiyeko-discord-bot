@@ -35,7 +35,7 @@ module.exports = {
         await member.guild.channels.cache.get(botConfig.welcomeChannel).send({ embeds: [embed], components: [row] });
 
         logger.log(`New member: ${member.user.tag}`);
-        logger.log(`Awating verification...`)
+        logger.log(`Awating verification...`, "verify client");
 
 
        

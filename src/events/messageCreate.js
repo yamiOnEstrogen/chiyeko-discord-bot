@@ -137,6 +137,7 @@ module.exports = {
                 if (m.content === verifyCode) {
                     message.member.roles.add(botConfig.memberRole);
                     message.reply({ content: "You have been verified!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
+                    logger.log(`User ${message.author.tag} has been verified!`, "verify client");
                     collector.stop();
                 }
             });
