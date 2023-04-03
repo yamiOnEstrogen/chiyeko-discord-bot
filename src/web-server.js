@@ -121,7 +121,8 @@ function webServer(client) {
     app.get("/login", async (req, res) => {
       const endpoint = req.query.url;
       if (!endpoint) {
-        return res.redirect(`${process.env.redirect_uri}`);
+        //return res.redirect(`${process.env.redirect_uri}`);
+	      return res.send("LOGIN ENPOINT DOWN")
       }
 
       if (endpoint === "twitch") {
