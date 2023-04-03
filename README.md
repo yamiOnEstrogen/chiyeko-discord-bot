@@ -1,4 +1,4 @@
-# Chiyeko
+# Chiyeko Discord Bot
 
 ![Logo](/.github/842699899b05545dd9af86bc2a5965b9.jpg)
 
@@ -64,7 +64,7 @@ Install dependencies
   npm install
 ```
 
-Deploy the bot (Slash Commands)
+Deploy the bot (Discord Slash Commands)
 
 ```bash
   npm run deploy
