@@ -1,4 +1,4 @@
-# Chiyeko
+# Chiyeko Discord Bot
 
 ![Logo](/.github/842699899b05545dd9af86bc2a5965b9.jpg)
 
