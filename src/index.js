@@ -7,6 +7,7 @@ const client = new Client({
     Intents.FLAGS.GUILD_PRESENCES,
     Intents.FLAGS.GUILD_MEMBERS,
     Intents.FLAGS.GUILD_VOICE_STATES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
   ],
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
   allowedMentions: { parse: ["users", "roles"], repliedUser: true },
@@ -45,6 +46,12 @@ client.socials = [
     url: "https://reddit.com/r/chiyekovtuber",
   }
 ];
+
+client.getUser = (id) => {
+  if (!id) return null;
+
+  return client.users.cache.get(id);
+}
 
 
 client.staff = () => {

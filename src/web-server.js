@@ -12,6 +12,11 @@ const Twitter = require("./utils/twitter.js");
 const twitter = new Twitter();
 const Logger = require("./utils/Logger");
 const logger = new Logger({ debug: true });
+const crypto = require('crypto');
+const qs = require('querystring');
+
+const buffer = crypto.randomBytes(16);
+const state = buffer.toString('hex');
 
 
 
@@ -115,7 +120,15 @@ function webServer(client) {
     });
 
     app.get("/login", async (req, res) => {
-      res.redirect(`${process.env.redirect_uri}`);
+      const endpoint = req.query.url;
+      if (!endpoint) {
+        return res.redirect(`${process.env.redirect_uri}`);
+      }
+
+      if (endpoint === "twitch") {
+        res.send("Sorry but twitch login is currently down. Please try again later.")
+      }
+      
     })
 
 

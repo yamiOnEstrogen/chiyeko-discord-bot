@@ -15,22 +15,24 @@ module.exports = {
             .setTitle(`Welcome to ${member.guild.name}`)
             .setDescription(`${randomWelcomeMessage}`)
             .setColor('PURPLE')
-            .addFields(
-                {
-                    name: 'Verify',
-                    value: `Please verify yourself by clicking the button below!`,
-                    inline: true
-                }
-            )
             .setTimestamp()
             .setFooter(`User ID: ${member.user.id}`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
             .setImage("https://media.tenor.com/73wKQVjruFcAAAAC/chiaki-nanami-anime.gif")
 
+            const row = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setURL("https://indivoxystudios.com")
+                    .setLabel(`Indivoxy Studios`)
+                    .setStyle('LINK')
+                    .setEmoji("<:pr:1091958428483719168>"),
+            )
+
             
 
 
-        await member.guild.channels.cache.get(botConfig.welcomeChannel).send({ embeds: [embed] });
+        await member.guild.channels.cache.get(botConfig.welcomeChannel).send({ embeds: [embed], components: [row] });
 
         logger.log(`New member: ${member.user.tag}`);
         logger.log(`Awating verification...`)
