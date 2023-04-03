@@ -64,7 +64,7 @@ Install dependencies
   npm install
 ```
 
-Deploy the bot (Slash Commands)
+Deploy the bot (Discord Slash Commands)
 
 ```bash
   npm run deploy
