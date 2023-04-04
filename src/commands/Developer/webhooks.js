@@ -3,14 +3,11 @@ const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.j
 const fs = require('fs');
 const path = require('path');
 
-const webhookFolder = // ../../.discord_webhooks
-    path.join(__dirname, '../../discord/webhooks');
+const webhookFolder = path.join(__dirname, '../../discord/webhooks');
 
 const webhooks = fs.readdirSync(webhookFolder).filter(file => file.endsWith('.json'));
 
-const convertToMarkdownJson = (json) => {
-    return `\`\`\`json\n${JSON.stringify(json, null, 2)}\n\`\`\``;
-}
+const convertToMarkdownJson = (json) => {return `\`\`\`json\n${JSON.stringify(json, null, 2)}\n\`\`\``; }
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -18,6 +15,15 @@ module.exports = {
 		.setDescription('View all webhooks in the server'),
         category: 'Developer',
 	async execute(interaction) {
+
+        const colors = [
+            "BLUE",
+            "RED",
+            "PINK",
+            "PURPLE",
+            "YELLOW",
+            "GREY"
+        ];
 
 
         const embed = new MessageEmbed()
@@ -34,7 +40,6 @@ module.exports = {
                   .setCustomId('select-webhook')
                   .setPlaceholder('Select a webhook')
                   .addOptions([
-                    // for each item in webhooks, add an option
                     webhooks.map(webhook => {
                         return {
                             label: webhook.replace('.json', ''),

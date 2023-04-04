@@ -10,13 +10,25 @@ module.exports = {
 
         category: "Info",
     async execute(interaction) {
-        const image = "https://cdn.discordapp.com/attachments/981632133191843852/1086767861122478150/current_games.jpg";
 
         const embed = new MessageEmbed()
             .setTitle('Supported Games')
             .setColor('RANDOM')
-            .setImage(image)
-            .setFooter("If you want to see a game added, please create a ticket.")
+            .addFields(
+                {
+                    name: 'Osu!',
+                    value: '87%', // TODO: Add multiplayer support
+                },
+                {
+                    name: 'Genshin Impact',
+                    value: '50%', // TODO: Add Fighing Support, and Quest Suuport
+                }
+            )
+            .setFooter({
+                text: 'If you want to see a game added, please DM me on Discord! (kiyo#8650)',
+                iconURL: interaction.client.getUser('547923574833545226').avatarURL({ dynamic: true })
+
+            })
 
 
         await interaction.reply({ embeds: [embed] });
