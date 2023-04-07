@@ -122,7 +122,7 @@ class Twitter {
             .setURL(`https://twitter.com/${user.data.username}/status/${tweet.id}`)
         );
 
-        this.client.channels.cache.get("1091915536469872774").send({ embeds: [embed], components: [row], content: `<@&1091906489729433682> New Tweet from our Goddess!` });
+        this.client.channels.cache.get("1091915664136093867").send({ embeds: [embed], components: [row], content: `<@&1091906489729433682> New Tweet from our Goddess!` });
         
       });
 
