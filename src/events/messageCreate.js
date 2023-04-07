@@ -133,7 +133,6 @@ module.exports = {
 
             if (message.member.roles.cache.has(botConfig.memberRole)) return;
 
-            // Check if there are any args
             if (args.length) return message.reply({ content: "Please do not provide any arguments!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
 
             const verifyCode = generateVerifyCode();
@@ -258,6 +257,31 @@ module.exports = {
             else {
                 message.reply({ content: "You do not have permission to use this command!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
             }
+        }
+
+        if (command === "send") {
+            if (message.author.id != process.env.owner) return;
+            const embed = new MessageEmbed()
+                .setTitle("Verify")
+                .setDescription(`To Gain Access to **The Artic Forest** please click the button below to verify yourself! \n\n This will let you gain access to channels like:
+
+                > 🎉・giveaways
+                > 🐦・twitter
+                > 🎊・events
+                > 🤖・github
+                
+                + many more`)
+                .setColor("#58b9ff")
+
+            const row = new MessageActionRow()
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId('verify')
+                        .setLabel('Verify')
+                        .setStyle('PRIMARY')
+                );
+
+            message.channel.send({ embeds: [embed], components: [row] });
         }
         
     }
