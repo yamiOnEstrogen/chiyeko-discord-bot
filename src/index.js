@@ -84,7 +84,7 @@ client.github = (commits) => {
       {
         name: client.getUser(process.env.owner).username,
         iconURL: client.getUser(process.env.owner).displayAvatarURL({ dynamic: true }),
-        url: "https://github.com/kiyolol"
+        url: "https://github.com/zenithvt"
       }
     )
 
@@ -100,7 +100,7 @@ client.github = (commits) => {
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
-          .setURL("https://github.com/kiyolol/chiyeko-discord-bot")
+          .setURL("https://github.com/zenithvt/chiyeko-discord-bot")
           .setLabel("View on GitHub")
           .setStyle("LINK")
       );
