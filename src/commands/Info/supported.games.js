@@ -25,7 +25,7 @@ module.exports = {
                 }
             )
             .setFooter({
-                text: 'If you want to see a game added, please DM me on Discord! (kiyo#8650)',
+                text: 'If you want to see a game added, please DM me on Discord! (zenith#8650)',
                 iconURL: interaction.client.getUser('547923574833545226').avatarURL({ dynamic: true })
 
             })
