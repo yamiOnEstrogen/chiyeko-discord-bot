@@ -128,37 +128,6 @@ module.exports = {
 
         const command = args.shift().toLowerCase();
 
-        if (command === "verify") {
-            if (message.channel.id != botConfig.verifyChannel) return;
-
-            if (message.member.roles.cache.has(botConfig.memberRole)) return;
-
-            if (args.length) return message.reply({ content: "Please do not provide any arguments!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
-
-            const verifyCode = generateVerifyCode();
-
-            message.reply({ content: `Please type \`${verifyCode}\` in the chat to verify yourself!` })
-
-            const filter = m => m.author.id === message.author.id;
-
-            const collector = message.channel.createMessageCollector(filter, { time: 60000 });
-            collector.on("collect", async m => {
-                if (m.author.id !== message.author.id) return;
-                if (m.content !== verifyCode) return message.reply({ content: "Invalid code!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
-                if (m.content === verifyCode) {
-                    message.member.roles.add(botConfig.memberRole);
-                    message.reply({ content: "You have been verified!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
-                    logger.log(`User ${message.author.tag} has been verified!`, "verify client");
-                    collector.stop();
-                }
-            });
-            collector.on("end", collected => {
-                if (collected.size === 0) {
-                    message.reply({ content: "Verification timed out!" }).then(msg => { setTimeout(() => msg.delete(), 5000) });
-                }
-            });
-        }
-
         if (command === "purge") {
             const amount = parseInt(args[0]);
             if (message.member.roles.cache.has("1091909117829984336")) {
