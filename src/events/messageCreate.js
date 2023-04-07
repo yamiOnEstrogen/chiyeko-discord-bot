@@ -1,7 +1,7 @@
 const botConfig = require("../utils/botconfig.js");
 const Logger = require('../utils/Logger');
 const logger = new Logger({ debug: true });
-const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
+const { MessageEmbed, MessageButton, MessageActionRow, MessageSelectMenu } = require('discord.js');
 const Levels = require("discord.js-leveling");
 
 const generateVerifyCode = () => {
@@ -15,6 +15,7 @@ const generateVerifyCode = () => {
 
 const MemesSchema = require("../models/memes.js");
 const FanArtSchema = require("../models/fanart.js");
+const botconfig = require("../utils/botconfig.js");
 
 const memeChannel = "1091917541548490762";
 const fanartChannel = "1091917731852464210";
@@ -27,7 +28,7 @@ const levelRoles = botConfig.levelRoles;
 module.exports = {
     name: 'messageCreate',
     async execute(message) {
-        const prefix = "c.";
+        const prefix = botConfig.prefix;
 
         if (message.author.bot) return;
 
@@ -251,6 +252,44 @@ module.exports = {
                 );
 
             message.channel.send({ embeds: [embed], components: [row] });
+        }
+
+        if (command === "roles") {
+            if (message.author.id != process.env.owner) return;
+
+            const embed = new MessageEmbed()
+                .setTitle("Roles")
+                .setDescription(`Get your roles here! To get a role, simply click on the role you want and you will get it!`)
+                .setImage("https://i.imgur.com/XQu1yWD.gif")
+                .setColor("#58b9ff")
+
+                let rows = [];
+           
+                botConfig.claimableRoles.forEach(role => {
+                    
+
+                    let index = botConfig.claimableRoles.indexOf(role);
+
+                    if (index % 5 === 0) {
+                        rows.push(new MessageActionRow().addComponents(
+                            new MessageButton()
+                                .setCustomId(`role_${role.id}`)
+                                .setLabel(message.guild.roles.cache.get(role.id).name)
+                                .setStyle('SECONDARY')
+                        ))
+                    }
+                    else {
+                        rows[rows.length - 1].addComponents(
+                            new MessageButton()
+                                .setCustomId(`role_${role.id}`)
+                                .setLabel(message.guild.roles.cache.get(role.id).name)
+                                .setStyle('SECONDARY')
+                        )
+                    }
+                })
+
+            message.channel.send({ embeds: [embed], components: rows });
+
         }
         
     }

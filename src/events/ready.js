@@ -22,7 +22,7 @@ module.exports = {
 
     const release = await github.getLatestRelease(); // * Get the latest release from github
 
-    const activities = [`/help`, `with ${client.users.cache.size} caffine filled humans`, `v${release.tag_name}`, `I'm on github! (https://github.chiyeko.xyz)`,]
+    const activities = [`/help`, `with ${client.users.cache.size} caffine filled humans`, `with ${client.commands.size} commands` ]; // * Create an array of activities
 
     setInterval(() => {
       const activity = activities[Math.floor(Math.random() * activities.length)]; //? Best way to do this?
