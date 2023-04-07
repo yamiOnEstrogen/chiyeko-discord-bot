@@ -22,6 +22,12 @@ const userSchema = new Schema({
         required: true,
     },
 
+    favoriteAnime: {
+        type: Array,
+        default: [],
+        required: false,
+    },
+
 
 })
 

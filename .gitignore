@@ -107,3 +107,5 @@ dist
 .env 
 package-lock.json
 test.js
+
+.test
