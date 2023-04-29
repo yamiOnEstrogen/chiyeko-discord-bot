@@ -233,7 +233,7 @@ module.exports = {
             if (message.author.id != process.env.owner) return;
             const embed = new MessageEmbed()
                 .setTitle("Verify")
-                .setDescription(`To Gain Access to **The Artic Forest** please click the button below to verify yourself! \n\n This will let you gain access to channels like:
+                .setDescription(`To Gain Access to **Carrot Patch Central** please click the button below to verify yourself! \n\n This will let you gain access to channels like:
 
                 > 🎉・giveaways
                 > 🐦・twitter
